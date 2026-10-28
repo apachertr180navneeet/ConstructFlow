@@ -4,7 +4,7 @@
       <i class="bi bi-list fs-5"></i>
     </button>
 
-    <!-- Global Project Selector -->
+    <!-- Global Project Selector (Desktop) -->
     <div class="erp-project-selector d-none d-md-block">
       <select class="form-select form-select-sm" id="global-project-select" onchange="window.location.search = '?switch_project=' + this.value" title="Active Construction Project">
         <?php foreach ($erp_projects as $p): ?>
@@ -14,15 +14,40 @@
         <?php endforeach; ?>
       </select>
     </div>
+
+    <!-- Mobile Project Switcher (Phone / Tablet) -->
+    <div class="d-md-none dropdown">
+      <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 py-1 px-2 border-1 bg-light text-dark" type="button" data-bs-toggle="dropdown" title="Active Project">
+        <i class="bi bi-building text-warning"></i>
+        <span class="small fw-bold text-truncate" style="max-width: 105px; font-size: 0.78rem;"><?= htmlspecialchars($current_project) ?></span>
+        <i class="bi bi-chevron-down text-muted" style="font-size: 0.65rem;"></i>
+      </button>
+      <ul class="dropdown-menu shadow-lg p-2" style="min-width: 250px;">
+        <li><h6 class="dropdown-header px-1">Active Project Site</h6></li>
+        <?php foreach ($erp_projects as $p): ?>
+          <li>
+            <a class="dropdown-item rounded py-1 px-2 d-flex justify-content-between align-items-center <?= ($p['id'] === $current_project) ? 'active bg-primary text-white' : '' ?>" href="?switch_project=<?= $p['id'] ?>">
+              <span class="small fw-semibold"><?= htmlspecialchars($p['name']) ?></span>
+              <span class="badge <?= ($p['id'] === $current_project) ? 'bg-light text-primary' : 'bg-secondary' ?>" style="font-size:0.65rem;"><?= $p['id'] ?></span>
+            </a>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
   </div>
 
   <div class="erp-topbar-right">
-    <!-- Quick Search Trigger -->
+    <!-- Quick Search Trigger (Desktop / Tablet) -->
     <div class="erp-search-trigger d-none d-sm-flex" id="search-bar-trigger">
       <i class="bi bi-search"></i>
       <span>Quick search modules, BOQ, POs...</span>
       <span class="kbd-shortcut ms-2">Ctrl+K</span>
     </div>
+
+    <!-- Mobile Search Trigger Button (Phone) -->
+    <button class="erp-topbar-btn d-sm-none" id="mobile-search-trigger" type="button" title="Search">
+      <i class="bi bi-search"></i>
+    </button>
 
     <!-- Quick Action Dropdown -->
     <div class="dropdown">

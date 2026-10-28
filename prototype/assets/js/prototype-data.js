@@ -93,71 +93,71 @@ window.BuildProData = {
     {
       title: "Main",
       items: [
-        { code: "dashboard", label: "Dashboard & Analytics", icon: "bi-speedometer2", path: "dashboard.html", badge: "Live" }
+        { code: "dashboard", label: "Dashboard & Analytics", icon: "bi-speedometer2", path: "dashboard.php", badge: "Live" }
       ]
     },
     {
       title: "Projects & Sites",
       items: [
-        { code: "project-list", label: "Project Management", icon: "bi-buildings", path: "projects/project-list.html" },
-        { code: "site-management", label: "Site Operations", icon: "bi-geo-alt", path: "projects/site-management.html" },
-        { code: "planning-scheduling", label: "Planning & Scheduling", icon: "bi-calendar-week", path: "modules/planning-scheduling.html" },
-        { code: "daily-progress", label: "Daily Progress (DPR)", icon: "bi-journal-check", path: "modules/daily-progress.html", badge: "Today" }
+        { code: "project-list", label: "Project Management", icon: "bi-buildings", path: "projects/project-list.php" },
+        { code: "site-management", label: "Site Operations", icon: "bi-geo-alt", path: "projects/site-management.php" },
+        { code: "planning-scheduling", label: "Planning & Scheduling", icon: "bi-calendar-week", path: "modules/planning-scheduling.php" },
+        { code: "daily-progress", label: "Daily Progress (DPR)", icon: "bi-journal-check", path: "modules/daily-progress.php", badge: "Today" }
       ]
     },
     {
       title: "Commercial & Estimation",
       items: [
-        { code: "estimation-tender", label: "Estimation & Tenders", icon: "bi-calculator", path: "modules/estimation-tender.html" },
-        { code: "boq-quantity-survey", label: "BOQ & Quantity Surveying", icon: "bi-table", path: "modules/boq-quantity-survey.html" },
-        { code: "budget-cost-control", label: "Budget & Cost Control", icon: "bi-pie-chart", path: "modules/budget-cost-control.html" },
-        { code: "client-billing", label: "Client Billing & RA Bills", icon: "bi-receipt-cutoff", path: "modules/client-billing.html" }
+        { code: "estimation-tender", label: "Estimation & Tenders", icon: "bi-calculator", path: "modules/estimation-tender.php" },
+        { code: "boq-quantity-survey", label: "BOQ & Quantity Surveying", icon: "bi-table", path: "modules/boq-quantity-survey.php" },
+        { code: "budget-cost-control", label: "Budget & Cost Control", icon: "bi-pie-chart", path: "modules/budget-cost-control.php" },
+        { code: "client-billing", label: "Client Billing & RA Bills", icon: "bi-receipt-cutoff", path: "modules/client-billing.php" }
       ]
     },
     {
       title: "Procurement & Materials",
       items: [
-        { code: "procurement", label: "Purchase & Requisitions", icon: "bi-cart-check", path: "modules/procurement.html", badge: "8 Req" },
-        { code: "vendors-suppliers", label: "Vendors & Suppliers", icon: "bi-truck", path: "modules/vendors-suppliers.html" },
-        { code: "inventory-materials", label: "Inventory & Stores", icon: "bi-boxes", path: "modules/inventory-materials.html" }
+        { code: "procurement", label: "Purchase & Requisitions", icon: "bi-cart-check", path: "modules/procurement.php", badge: "8 Req" },
+        { code: "vendors-suppliers", label: "Vendors & Suppliers", icon: "bi-truck", path: "modules/vendors-suppliers.php" },
+        { code: "inventory-materials", label: "Inventory & Stores", icon: "bi-boxes", path: "modules/inventory-materials.php" }
       ]
     },
     {
       title: "Workforce & Subcontractors",
       items: [
-        { code: "labour-workforce", label: "Labour & Muster Roll", icon: "bi-people", path: "modules/labour-workforce.html" },
-        { code: "contractor-management", label: "Contractors & RA Bills", icon: "bi-person-badge", path: "modules/contractor-management.html" },
-        { code: "equipment-machinery", label: "Equipment & Plant", icon: "bi-tools", path: "modules/equipment-machinery.html" },
-        { code: "vehicle-transport", label: "Vehicle & Fleet Logistics", icon: "bi-ev-front", path: "modules/vehicle-transport.html" }
+        { code: "labour-workforce", label: "Labour & Muster Roll", icon: "bi-people", path: "modules/labour-workforce.php" },
+        { code: "contractor-management", label: "Contractors & RA Bills", icon: "bi-person-badge", path: "modules/contractor-management.php" },
+        { code: "equipment-machinery", label: "Equipment & Plant", icon: "bi-tools", path: "modules/equipment-machinery.php" },
+        { code: "vehicle-transport", label: "Vehicle & Fleet Logistics", icon: "bi-ev-front", path: "modules/vehicle-transport.php" }
       ]
     },
     {
       title: "Finance & Accounts",
       items: [
-        { code: "finance-accounting", label: "Finance & Accounting", icon: "bi-cash-coin", path: "modules/finance-accounting.html" },
-        { code: "expenses-petty-cash", label: "Petty Cash & Site Imprest", icon: "bi-wallet2", path: "modules/expenses-petty-cash.html" }
+        { code: "finance-accounting", label: "Finance & Accounting", icon: "bi-cash-coin", path: "modules/finance-accounting.php" },
+        { code: "expenses-petty-cash", label: "Petty Cash & Site Imprest", icon: "bi-wallet2", path: "modules/expenses-petty-cash.php" }
       ]
     },
     {
       title: "Quality, Safety & Maintenance",
       items: [
-        { code: "quality-control", label: "Quality QA/QC & Tests", icon: "bi-check2-circle", path: "modules/quality-control.html" },
-        { code: "safety-compliance", label: "HSE Safety & Compliance", icon: "bi-shield-check", path: "modules/safety-compliance.html", badge: "Zero LTI" },
-        { code: "maintenance-defects", label: "Defects & DLP Snag List", icon: "bi-exclamation-triangle", path: "modules/maintenance-defects.html" }
+        { code: "quality-control", label: "Quality QA/QC & Tests", icon: "bi-check2-circle", path: "modules/quality-control.php" },
+        { code: "safety-compliance", label: "HSE Safety & Compliance", icon: "bi-shield-check", path: "modules/safety-compliance.php", badge: "Zero LTI" },
+        { code: "maintenance-defects", label: "Defects & DLP Snag List", icon: "bi-exclamation-triangle", path: "modules/maintenance-defects.php" }
       ]
     },
     {
       title: "Corporate & System",
       items: [
-        { code: "clients-crm", label: "Client CRM & Leads", icon: "bi-person-rolodex", path: "clients/crm.html" },
-        { code: "hr-payroll", label: "HR & Staff Payroll", icon: "bi-person-lines-fill", path: "modules/hr-payroll.html" },
-        { code: "documents-drawings", label: "Drawings & Documents (EDMS)", icon: "bi-folder2-open", path: "modules/documents-drawings.html" },
-        { code: "approvals-workflow", label: "Approvals & Workflow", icon: "bi-diagram-3", path: "modules/approvals-workflow.html", badge: "5 New" },
-        { code: "reports-mis", label: "Reports & Executive MIS", icon: "bi-bar-chart-line", path: "modules/reports-mis.html" },
-        { code: "notifications-communication", label: "Alerts & Site Broadcast", icon: "bi-bell", path: "modules/notifications-communication.html" },
-        { code: "company-settings", label: "Company Administration", icon: "bi-building-gear", path: "administration/company-settings.html" },
-        { code: "users-roles", label: "Users, Roles & ACL", icon: "bi-shield-lock", path: "administration/users-roles-permissions.html" },
-        { code: "integrations-audit", label: "Integrations & Audit Logs", icon: "bi-database-check", path: "modules/integrations-audit-backup.html" }
+        { code: "clients-crm", label: "Client CRM & Leads", icon: "bi-person-rolodex", path: "clients/crm.php" },
+        { code: "hr-payroll", label: "HR & Staff Payroll", icon: "bi-person-lines-fill", path: "modules/hr-payroll.php" },
+        { code: "documents-drawings", label: "Drawings & Documents (EDMS)", icon: "bi-folder2-open", path: "modules/documents-drawings.php" },
+        { code: "approvals-workflow", label: "Approvals & Workflow", icon: "bi-diagram-3", path: "modules/approvals-workflow.php", badge: "5 New" },
+        { code: "reports-mis", label: "Reports & Executive MIS", icon: "bi-bar-chart-line", path: "modules/reports-mis.php" },
+        { code: "notifications-communication", label: "Alerts & Site Broadcast", icon: "bi-bell", path: "modules/notifications-communication.php" },
+        { code: "company-settings", label: "Company Administration", icon: "bi-building-gear", path: "administration/company-settings.php" },
+        { code: "users-roles", label: "Users, Roles & ACL", icon: "bi-shield-lock", path: "administration/users-roles-permissions.php" },
+        { code: "integrations-audit", label: "Integrations & Audit Logs", icon: "bi-database-check", path: "modules/integrations-audit-backup.php" }
       ]
     }
   ],

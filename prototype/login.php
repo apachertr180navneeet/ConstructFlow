@@ -121,6 +121,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       width: 100%;
       max-width: 440px;
     }
+    @media (max-width: 575.98px) {
+      .login-form-panel {
+        padding: 1.5rem 1rem !important;
+      }
+      .login-card {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body class="bg-light">

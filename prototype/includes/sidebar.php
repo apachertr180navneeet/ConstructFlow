@@ -8,6 +8,9 @@
         <span class="erp-brand-subtitle">Construction Cloud</span>
       </div>
     </a>
+    <button type="button" class="btn btn-sm btn-link text-white-50 p-1 d-lg-none" id="btn-sidebar-mobile-close" title="Close menu" aria-label="Close sidebar">
+      <i class="bi bi-x-lg fs-5"></i>
+    </button>
   </div>
 
   <!-- Navigation Items -->

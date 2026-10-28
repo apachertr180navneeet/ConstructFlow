@@ -36,14 +36,14 @@ window.BuildProApp = (function() {
 
   function renderSidebar() {
     var sidebarEl = document.getElementById('app-sidebar');
-    if (!sidebarEl) return;
+    if (!sidebarEl || sidebarEl.children.length > 0) return;
 
     var navGroups = window.BuildProData ? window.BuildProData.navigationGroups : [];
     var html = '';
 
     // Header / Brand
     html += '<div class="erp-sidebar-header">';
-    html += '  <a href="' + rootPath + 'dashboard.html" class="erp-brand">';
+    html += '  <a href="' + rootPath + 'dashboard.php" class="erp-brand">';
     html += '    <div class="erp-brand-icon"><i class="bi bi-cone-striped"></i></div>';
     html += '    <div class="erp-brand-text">';
     html += '      <span class="erp-brand-title">BuildPro ERP</span>';
@@ -89,7 +89,7 @@ window.BuildProApp = (function() {
 
   function renderTopbar() {
     var topbarEl = document.getElementById('app-topbar');
-    if (!topbarEl) return;
+    if (!topbarEl || topbarEl.children.length > 0) return;
 
     var projects = window.BuildProData ? window.BuildProData.projects : [];
     var html = '';
@@ -126,11 +126,11 @@ window.BuildProApp = (function() {
     html += '    </button>';
     html += '    <ul class="dropdown-menu dropdown-menu-end shadow-sm">';
     html += '      <li><h6 class="dropdown-header">Operations Shortcuts</h6></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'projects/project-create.html"><i class="bi bi-plus-circle me-2 text-primary"></i>New Project</a></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/procurement.html#create-po"><i class="bi bi-cart-plus me-2 text-warning"></i>Create Purchase Order</a></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/daily-progress.html#create-dpr"><i class="bi bi-journal-plus me-2 text-success"></i>Daily Site Report (DPR)</a></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/client-billing.html#create-bill"><i class="bi bi-receipt me-2 text-info"></i>Generate RA Bill</a></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/safety-compliance.html#report-incident"><i class="bi bi-shield-plus me-2 text-danger"></i>Report Safety Incident</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'projects/project-create.php"><i class="bi bi-plus-circle me-2 text-primary"></i>New Project</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/procurement.php#create-po"><i class="bi bi-cart-plus me-2 text-warning"></i>Create Purchase Order</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/daily-progress.php#create-dpr"><i class="bi bi-journal-plus me-2 text-success"></i>Daily Site Report (DPR)</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/client-billing.php#create-bill"><i class="bi bi-receipt me-2 text-info"></i>Generate RA Bill</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/safety-compliance.php#report-incident"><i class="bi bi-shield-plus me-2 text-danger"></i>Report Safety Incident</a></li>';
     html += '      <li><hr class="dropdown-divider"></li>';
     html += '      <li><a class="dropdown-item text-muted" href="javascript:BuildProApp.resetDemoData()"><i class="bi bi-arrow-counterclockwise me-2"></i>Reset Demo Cache</a></li>';
     html += '    </ul>';
@@ -148,24 +148,24 @@ window.BuildProApp = (function() {
     html += '        <span class="badge bg-danger rounded-pill">4 New</span>';
     html += '      </div>';
     html += '      <div class="list-group list-group-flush small" style="max-height: 280px; overflow-y: auto;">';
-    html += '        <a href="' + rootPath + 'modules/procurement.html" class="list-group-item list-group-item-action">';
+    html += '        <a href="' + rootPath + 'modules/procurement.php" class="list-group-item list-group-item-action">';
     html += '          <div class="d-flex w-100 justify-content-between text-muted" style="font-size:0.7rem;"><span>Procurement</span><span>10m ago</span></div>';
     html += '          <div class="fw-semibold text-dark mt-1">PO-2024-089 Pending Approval</div>';
     html += '          <div class="text-secondary small">500 MT TMT Bars for Skylark Heights</div>';
     html += '        </a>';
-    html += '        <a href="' + rootPath + 'modules/inventory-materials.html" class="list-group-item list-group-item-action">';
+    html += '        <a href="' + rootPath + 'modules/inventory-materials.php" class="list-group-item list-group-item-action">';
     html += '          <div class="d-flex w-100 justify-content-between text-muted" style="font-size:0.7rem;"><span class="text-danger fw-bold">Low Stock Warning</span><span>35m ago</span></div>';
     html += '          <div class="fw-semibold text-dark mt-1">OPC 53 Cement below buffer</div>';
     html += '          <div class="text-secondary small">Current stock: 240 bags at CyberTower B</div>';
     html += '        </a>';
-    html += '        <a href="' + rootPath + 'modules/client-billing.html" class="list-group-item list-group-item-action">';
+    html += '        <a href="' + rootPath + 'modules/client-billing.php" class="list-group-item list-group-item-action">';
     html += '          <div class="d-flex w-100 justify-content-between text-muted" style="font-size:0.7rem;"><span>Billing</span><span>2h ago</span></div>';
     html += '          <div class="fw-semibold text-dark mt-1">RA Bill #07 Certified by PMC</div>';
     html += '          <div class="text-secondary small">₹ 1,48,20,000 received for Prestige Urban</div>';
     html += '        </a>';
     html += '      </div>';
     html += '      <div class="p-2 text-center border-top bg-light rounded-bottom">';
-    html += '        <a href="' + rootPath + 'modules/notifications-communication.html" class="text-decoration-none small fw-semibold text-primary">View All System Broadcasts</a>';
+    html += '        <a href="' + rootPath + 'modules/notifications-communication.php" class="text-decoration-none small fw-semibold text-primary">View All System Broadcasts</a>';
     html += '      </div>';
     html += '    </div>';
     html += '  </div>';
@@ -186,11 +186,11 @@ window.BuildProApp = (function() {
     html += '        <div class="text-muted small">navneet@buildpro-erp.in</div>';
     html += '        <div class="badge bg-primary-subtle text-primary mt-1">Super Admin / PMC</div>';
     html += '      </li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'administration/company-settings.html"><i class="bi bi-buildings me-2"></i>Company Profile</a></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'administration/users-roles-permissions.html"><i class="bi bi-shield-check me-2"></i>Access Control & Roles</a></li>';
-    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/integrations-audit-backup.html"><i class="bi bi-clock-history me-2"></i>Security Audit Log</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'administration/company-settings.php"><i class="bi bi-buildings me-2"></i>Company Profile</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'administration/users-roles-permissions.php"><i class="bi bi-shield-check me-2"></i>Access Control & Roles</a></li>';
+    html += '      <li><a class="dropdown-item" href="' + rootPath + 'modules/integrations-audit-backup.php"><i class="bi bi-clock-history me-2"></i>Security Audit Log</a></li>';
     html += '      <li><hr class="dropdown-divider"></li>';
-    html += '      <li><a class="dropdown-item text-danger" href="' + rootPath + 'index.html"><i class="bi bi-box-arrow-right me-2"></i>Exit Prototype / Portal</a></li>';
+    html += '      <li><a class="dropdown-item text-danger" href="' + rootPath + 'index.php"><i class="bi bi-box-arrow-right me-2"></i>Exit Prototype / Portal</a></li>';
     html += '    </ul>';
     html += '  </div>';
 
@@ -201,7 +201,7 @@ window.BuildProApp = (function() {
 
   function renderFooter() {
     var footerEl = document.getElementById('app-footer');
-    if (!footerEl) return;
+    if (!footerEl || footerEl.children.length > 0) return;
 
     var html = '';
     html += '<div>';
@@ -210,7 +210,7 @@ window.BuildProApp = (function() {
     html += '<div class="d-flex align-items-center gap-3">';
     html += '  <span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-shield-check me-1"></i>ISO 9001:2015</span>';
     html += '  <span class="badge bg-info-subtle text-info border border-info-subtle"><i class="bi bi-cloud-check me-1"></i>Local Prototype Mode</span>';
-    html += '  <a href="' + rootPath + 'modules/integrations-audit-backup.html" class="text-decoration-none text-muted small">System Health</a>';
+    html += '  <a href="' + rootPath + 'modules/integrations-audit-backup.php" class="text-decoration-none text-muted small">System Health</a>';
     html += '</div>';
 
     footerEl.innerHTML = html;
@@ -365,7 +365,13 @@ window.BuildProApp = (function() {
       });
     }
 
-    // Mobile sidebar toggle
+    // Mobile sidebar toggle & close helpers
+    function closeMobileSidebar() {
+      document.body.classList.remove('sidebar-mobile-open');
+      var backdrop = document.querySelector('.sidebar-backdrop');
+      if (backdrop) backdrop.remove();
+    }
+
     var btnMenu = document.getElementById('btn-toggle-menu');
     if (btnMenu) {
       btnMenu.addEventListener('click', function() {
@@ -375,15 +381,36 @@ window.BuildProApp = (function() {
           if (!existingBackdrop) {
             var backdrop = document.createElement('div');
             backdrop.className = 'sidebar-backdrop';
-            backdrop.addEventListener('click', function() {
-              document.body.classList.remove('sidebar-mobile-open');
-              backdrop.remove();
-            });
+            backdrop.addEventListener('click', closeMobileSidebar);
             document.body.appendChild(backdrop);
           }
         } else if (existingBackdrop) {
           existingBackdrop.remove();
         }
+      });
+    }
+
+    // Mobile sidebar close button
+    var btnCloseMobile = document.getElementById('btn-sidebar-mobile-close');
+    if (btnCloseMobile) {
+      btnCloseMobile.addEventListener('click', closeMobileSidebar);
+    }
+
+    // Close mobile sidebar on nav link tap (< 992px)
+    var navLinks = document.querySelectorAll('.erp-sidebar-nav .erp-nav-link');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (window.innerWidth < 992) {
+          closeMobileSidebar();
+        }
+      });
+    });
+
+    // Mobile search button trigger
+    var mobileSearchBtn = document.getElementById('mobile-search-trigger');
+    if (mobileSearchBtn) {
+      mobileSearchBtn.addEventListener('click', function() {
+        openGlobalSearch();
       });
     }
 
