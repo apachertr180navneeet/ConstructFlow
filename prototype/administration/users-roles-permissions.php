@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Users, Roles &amp; Permissions";
 $active_page = "users-roles";
 require_once __DIR__ . '/../includes/config.php';

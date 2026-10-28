@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Quality Control (QA/QC)";
 $active_page = "quality-control";
 require_once __DIR__ . '/../includes/config.php';

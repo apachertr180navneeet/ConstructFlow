@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Company Administration";
 $active_page = "company-settings";
 require_once __DIR__ . '/../includes/config.php';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "BOQ &amp; Quantity Surveying";
 $active_page = "boq-quantity-survey";
 require_once __DIR__ . '/../includes/config.php';

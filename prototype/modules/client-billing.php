@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Client Billing &amp; Receivables";
 $active_page = "client-billing";
 require_once __DIR__ . '/../includes/config.php';

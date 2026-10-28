@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Equipment &amp; Machinery";
 $active_page = "equipment-machinery";
 require_once __DIR__ . '/../includes/config.php';

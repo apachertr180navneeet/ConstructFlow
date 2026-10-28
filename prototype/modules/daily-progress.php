@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Daily Progress Report (DPR)";
 $active_page = "daily-progress";
 require_once __DIR__ . '/../includes/config.php';

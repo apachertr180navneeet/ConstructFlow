@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Planning &amp; Scheduling";
 $active_page = "planning-scheduling";
 require_once __DIR__ . '/../includes/config.php';

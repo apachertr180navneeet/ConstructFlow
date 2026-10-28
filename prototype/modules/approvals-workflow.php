@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Approvals &amp; Workflow";
 $active_page = "approvals-workflow";
 require_once __DIR__ . '/../includes/config.php';

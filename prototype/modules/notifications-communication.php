@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Notifications &amp; Site Broadcasts";
 $active_page = "notifications-communication";
 require_once __DIR__ . '/../includes/config.php';

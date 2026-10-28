@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Budget &amp; Cost Control";
 $active_page = "budget-cost-control";
 require_once __DIR__ . '/../includes/config.php';

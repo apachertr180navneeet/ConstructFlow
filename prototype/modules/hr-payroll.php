@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "HR &amp; Staff Payroll";
 $active_page = "hr-payroll";
 require_once __DIR__ . '/../includes/config.php';

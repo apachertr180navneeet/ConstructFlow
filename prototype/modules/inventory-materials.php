@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Inventory &amp; Stores";
 $active_page = "inventory-materials";
 require_once __DIR__ . '/../includes/config.php';

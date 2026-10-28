@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Vehicle &amp; Transport Logistics";
 $active_page = "vehicle-transport";
 require_once __DIR__ . '/../includes/config.php';

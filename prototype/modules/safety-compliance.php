@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Safety &amp; Compliance (HSE)";
 $active_page = "safety-compliance";
 require_once __DIR__ . '/../includes/config.php';

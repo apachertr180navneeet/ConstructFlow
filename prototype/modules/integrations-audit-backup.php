@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Integrations, Audit &amp; Backup";
 $active_page = "integrations-audit";
 require_once __DIR__ . '/../includes/config.php';

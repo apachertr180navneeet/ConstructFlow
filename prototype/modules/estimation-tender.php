@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Estimation &amp; Tender Management";
 $active_page = "estimation-tender";
 require_once __DIR__ . '/../includes/config.php';

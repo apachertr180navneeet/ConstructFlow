@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Maintenance &amp; Defects (DLP)";
 $active_page = "maintenance-defects";
 require_once __DIR__ . '/../includes/config.php';

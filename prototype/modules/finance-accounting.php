@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Finance &amp; Accounting";
 $active_page = "finance-accounting";
 require_once __DIR__ . '/../includes/config.php';

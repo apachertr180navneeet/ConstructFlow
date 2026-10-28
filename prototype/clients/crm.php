@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Client CRM &amp; Accounts";
 $active_page = "clients-crm";
 require_once __DIR__ . '/../includes/config.php';

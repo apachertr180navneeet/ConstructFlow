@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Drawings &amp; Document Management (EDMS)";
 $active_page = "documents-drawings";
 require_once __DIR__ . '/../includes/config.php';

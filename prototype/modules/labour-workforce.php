@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Labour &amp; Workforce Management";
 $active_page = "labour-workforce";
 require_once __DIR__ . '/../includes/config.php';

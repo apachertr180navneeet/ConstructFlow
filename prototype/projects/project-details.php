@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Project 360Â° View";
 $active_page = "project-list";
 require_once __DIR__ . '/../includes/config.php';

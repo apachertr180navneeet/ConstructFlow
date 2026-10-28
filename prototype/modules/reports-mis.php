@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Reports &amp; MIS Analytics";
 $active_page = "reports-mis";
 require_once __DIR__ . '/../includes/config.php';

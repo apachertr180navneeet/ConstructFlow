@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Contractor Management &amp; RA Bills";
 $active_page = "contractor-management";
 require_once __DIR__ . '/../includes/config.php';

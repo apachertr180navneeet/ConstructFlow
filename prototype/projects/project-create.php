@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title = "Onboard Project";
 $active_page = "project-list";
 require_once __DIR__ . '/../includes/config.php';
