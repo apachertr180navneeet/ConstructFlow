@@ -1,0 +1,336 @@
+﻿<?php
+$page_title = "Users, Roles &amp; Permissions";
+$active_page = "users-roles";
+require_once __DIR__ . '/../includes/config.php';
+require_once $includes_path . 'header.php';
+require_once $includes_path . 'sidebar.php';
+?>
+
+<div class="erp-main">
+  <?php require_once $includes_path . 'topbar.php'; ?>
+
+
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.php">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="company-settings.php">Administration</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Access Control &amp; RBAC</span>
+          </div>
+          <h1>User Accounts, Roles &amp; Access Control</h1>
+          <p class="erp-page-desc">Role-based access control (RBAC), multi-factor security, site-level authorization and user directory.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+            <i class="bi bi-person-plus"></i> Add New User
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('users-table', 'BuildPro_User_Directory')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- Stats -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Active ERP Users</div>
+                <div class="erp-stat-value">64 Staff</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> 100% MFA Enrolled</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-people"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Predefined Roles</div>
+                <div class="erp-stat-value">8 Roles</div>
+                <div class="erp-stat-trend trend-neutral">From Director to Storekeeper</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-shield-check"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Field Mobile Users</div>
+                <div class="erp-stat-value">38 Engineers</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-phone"></i> DPR &amp; QA/QC Mobile App</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-phone"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Audit Flagged Logins</div>
+                <div class="erp-stat-value">0 Incidents</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-shield-lock"></i> Clean Security Log</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-lock"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search staff name, email, role...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All Roles</option>
+              <option value="Director">Project Director</option>
+              <option value="Manager">Project Manager</option>
+              <option value="Billing">Billing &amp; QS Engineer</option>
+              <option value="Safety">Safety HSE Officer</option>
+              <option value="Store">Storekeeper</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- User Directory Table -->
+        <div class="erp-table-responsive shadow-sm mb-4">
+          <table class="table erp-table mb-0" id="users-table">
+            <thead>
+              <tr>
+                <th>Staff Member</th>
+                <th>Role &amp; Designation</th>
+                <th>Assigned Project / Site</th>
+                <th>Official Email</th>
+                <th>Mobile Contact</th>
+                <th>Last Login</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="erp-avatar" style="width: 32px; height: 32px; font-size: 0.75rem;">NK</div>
+                    <div>
+                      <div class="fw-bold text-dark">Navneet Kumar</div>
+                      <div class="small text-muted">EMP-2019-012</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge bg-primary">Senior Project Director (Super Admin)</span></td>
+                <td>All Enterprise Projects</td>
+                <td>navneet@buildpro-erp.in</td>
+                <td>+91 98201 99281</td>
+                <td class="small text-muted">Today, 10:24 AM</td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Navneet Kumar', {'Role': 'Super Admin', 'Email': 'navneet@buildpro-erp.in', 'Projects': 'All'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit permissions for Navneet Kumar', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="erp-avatar bg-secondary" style="width: 32px; height: 32px; font-size: 0.75rem;">RR</div>
+                    <div>
+                      <div class="fw-bold text-dark">Rajeshwar Rao</div>
+                      <div class="small text-muted">EMP-2020-045</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge bg-info text-dark">Project Manager (Site Lead)</span></td>
+                <td>PRJ-2024-001 : Skylark Heights</td>
+                <td>rajeshwar.rao@buildpro-erp.in</td>
+                <td>+91 98450 18273</td>
+                <td class="small text-muted">Yesterday, 06:15 PM</td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Rajeshwar Rao', {'Role': 'Project Manager', 'Project': 'Skylark Heights'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit user', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="erp-avatar bg-warning text-dark" style="width: 32px; height: 32px; font-size: 0.75rem;">MS</div>
+                    <div>
+                      <div class="fw-bold text-dark">Manoj V. Sharma</div>
+                      <div class="small text-muted">EMP-2021-089</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge bg-warning text-dark">Chief Billing &amp; QS Engineer</span></td>
+                <td>PRJ-2024-001 &amp; PRJ-2024-002</td>
+                <td>manoj.sharma@buildpro-erp.in</td>
+                <td>+91 97110 44921</td>
+                <td class="small text-muted">Today, 09:42 AM</td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Manoj Sharma', {'Role': 'Billing & QS', 'Email': 'manoj.sharma@buildpro-erp.in'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit user', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="erp-avatar bg-danger" style="width: 32px; height: 32px; font-size: 0.75rem;">AR</div>
+                    <div>
+                      <div class="fw-bold text-dark">Arjun Rawat</div>
+                      <div class="small text-muted">EMP-2022-114</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge bg-danger">HSE Safety Lead Officer</span></td>
+                <td>PRJ-2024-004 : NH48 Expressway</td>
+                <td>arjun.rawat@buildpro-erp.in</td>
+                <td>+91 94220 81729</td>
+                <td class="small text-muted">Today, 07:30 AM</td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Arjun Rawat', {'Role': 'HSE Officer', 'Project': 'NH48'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit user', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Role Permissions Matrix Preview -->
+        <div class="erp-card">
+          <div class="erp-card-header">
+            <h5 class="erp-card-title"><i class="bi bi-grid-3x3-gap text-primary"></i> Master Role Permissions Matrix (ACL)</h5>
+            <span class="badge bg-light text-muted border">Tier-1 Security</span>
+          </div>
+          <div class="erp-card-body p-0">
+            <div class="table-responsive">
+              <table class="table erp-table mb-0 text-center">
+                <thead>
+                  <tr class="text-start">
+                    <th>Module Group</th>
+                    <th class="text-center">Project Director</th>
+                    <th class="text-center">Project Manager</th>
+                    <th class="text-center">Billing &amp; QS</th>
+                    <th class="text-center">Site Engineer</th>
+                    <th class="text-center">Safety Officer</th>
+                    <th class="text-center">Storekeeper</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <tr class="text-start">
+                    <td class="fw-bold">1. Projects &amp; Sites</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Full Access</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Assigned</td>
+                    <td class="text-center text-primary"><i class="bi bi-eye"></i> View Only</td>
+                    <td class="text-center text-info"><i class="bi bi-pencil"></i> Edit DPR</td>
+                    <td class="text-center text-primary"><i class="bi bi-eye"></i> View Only</td>
+                    <td class="text-center text-muted"><i class="bi bi-dash"></i> No Access</td>
+                  </tr>
+                  <tr class="text-start">
+                    <td class="fw-bold">2. BOQ &amp; Client Billing</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Approve</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Verify</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Create/Edit</td>
+                    <td class="text-center text-info"><i class="bi bi-pencil"></i> MB Entry</td>
+                    <td class="text-center text-muted"><i class="bi bi-dash"></i> No Access</td>
+                    <td class="text-center text-muted"><i class="bi bi-dash"></i> No Access</td>
+                  </tr>
+                  <tr class="text-start">
+                    <td class="fw-bold">3. Purchase &amp; Procurement</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Final Signoff</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Approve Indent</td>
+                    <td class="text-center text-primary"><i class="bi bi-eye"></i> View Rates</td>
+                    <td class="text-center text-info"><i class="bi bi-pencil"></i> Indent Only</td>
+                    <td class="text-center text-info"><i class="bi bi-pencil"></i> PPE Indents</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> GRN Entry</td>
+                  </tr>
+                  <tr class="text-start">
+                    <td class="fw-bold">4. HSE Safety &amp; QA/QC</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Audit</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Review</td>
+                    <td class="text-center text-muted"><i class="bi bi-dash"></i> No Access</td>
+                    <td class="text-center text-info"><i class="bi bi-pencil"></i> Cube Tests</td>
+                    <td class="text-center text-success"><i class="bi bi-check-circle-fill"></i> Full Lead</td>
+                    <td class="text-center text-muted"><i class="bi bi-dash"></i> No Access</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Add User Modal -->
+      <div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-person-plus text-primary me-2"></i>Create New Staff ERP Account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addUserForm">
+              <div class="modal-body">
+                <div class="row g-2 mb-3">
+                  <div class="col-6">
+                    <label class="form-label">First Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" required placeholder="First Name">
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" required placeholder="Last Name">
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Work Email ID <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" required placeholder="username@buildpro-erp.in">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Assigned System Role <span class="text-danger">*</span></label>
+                  <select class="form-select" required>
+                    <option value="">Select Role...</option>
+                    <option>Project Manager (Site Level)</option>
+                    <option>Billing &amp; Quantity Surveyor</option>
+                    <option>Site Resident Engineer</option>
+                    <option>HSE Safety Officer</option>
+                    <option>Storekeeper &amp; Inventory Lead</option>
+                    <option>Finance Accountant</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Primary Site Assignment</label>
+                  <select class="form-select">
+                    <option>All Projects (Corporate Pool)</option>
+                    <option>PRJ-2024-001 : Skylark Heights</option>
+                    <option>PRJ-2024-002 : CyberTower B</option>
+                    <option>PRJ-2024-003 : LogisticHub Pune</option>
+                    <option>PRJ-2024-004 : NH48 Expressway</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Create User &amp; Send Invite</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+
+<script>
+    document.getElementById('addUserForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+      BuildProApp.showToast('New user account provisioned successfully! Activation email sent.', 'success');
+    });
+  </script>
+
+<?php require_once $includes_path . 'footer.php'; ?>

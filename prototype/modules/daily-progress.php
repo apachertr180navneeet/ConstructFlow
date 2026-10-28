@@ -1,0 +1,269 @@
+﻿<?php
+$page_title = "Daily Progress Report (DPR)";
+$active_page = "daily-progress";
+require_once __DIR__ . '/../includes/config.php';
+require_once $includes_path . 'header.php';
+require_once $includes_path . 'sidebar.php';
+?>
+
+<div class="erp-main">
+  <?php require_once $includes_path . 'topbar.php'; ?>
+
+
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.php">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Projects &amp; Sites</span>
+            <i class="bi bi-chevron-right"></i>
+            <span>Daily Progress Report</span>
+          </div>
+          <h1>Daily Progress Report (DPR) &amp; Site Logbook</h1>
+          <p class="erp-page-desc">Comprehensive daily site operational log: weather, work accomplished, trades on duty, materials poured, hindrances and site photographs.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#createDPRModal">
+            <i class="bi bi-journal-plus"></i> Submit Today's DPR
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('dpr-table', 'BuildPro_DPR_Logbook')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- 4 KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">DPR Submissions (Today)</div>
+                <div class="erp-stat-value">15 / 15 Sites</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> 100% On-Time Submission</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-journal-check"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Concrete Poured Today</div>
+                <div class="erp-stat-value">480 Cum</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-layers"></i> M35 Slab &amp; Columns</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-moisture"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Rebar Tied / Placed</div>
+                <div class="erp-stat-value">42.5 MT</div>
+                <div class="erp-stat-trend trend-neutral">Tower 1 &amp; Pier 14</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-bricks"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Logged Site Delays</div>
+                <div class="erp-stat-value">1 Minor Delay</div>
+                <div class="erp-stat-trend trend-neutral">Cement RMC Traffic transit 40m</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-cone-striped"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search DPR code, site, engineer...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All DPR Reports</option>
+              <option value="Approved">Verified by PM</option>
+              <option value="Submitted">Submitted by Site Eng</option>
+            </select>
+            <input type="date" class="form-control form-control-sm" value="2024-10-28" style="width: 150px;">
+          </div>
+        </div>
+
+        <!-- DPR Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="dpr-table">
+            <thead>
+              <tr>
+                <th>DPR Serial No.</th>
+                <th>Date &amp; Weather</th>
+                <th>Project &amp; Site Wing</th>
+                <th>Resident Site Engineer</th>
+                <th>Manpower on Duty</th>
+                <th>Primary Works Executed</th>
+                <th>Key Material Poured</th>
+                <th>Hindrances / Issues</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">DPR-20241028-01</td>
+                <td>
+                  <div class="fw-bold text-dark">28-Oct-2024 (Today)</div>
+                  <div class="small text-muted"><i class="bi bi-sun text-warning me-1"></i>Clear, 31Â°C, Humidity: 62%</div>
+                </td>
+                <td>
+                  <div class="fw-bold text-dark">Skylark Heights (PRJ-2024-001)</div>
+                  <div class="small text-muted">Tower 1 (27th Floor Level)</div>
+                </td>
+                <td>Mahesh Kadam (Site Eng)</td>
+                <td><span class="fw-bold text-dark">142 Labour</span> (84 Skilled)</td>
+                <td>
+                  <div>RCC Column M35 casting (8 columns).</div>
+                  <div class="small text-muted">28th floor shuttering alignment 85% completed.</div>
+                </td>
+                <td>32 Cum RMC M35 &bull; 6.4 MT TMT</td>
+                <td><span class="text-success small fw-semibold">Nil / No Obstruction</span></td>
+                <td><span class="badge-status active">Verified by PM</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('DPR-20241028-01 Skylark', {'Project': 'Skylark Heights', 'Concrete': '32 Cum RMC M35', 'Labour': '142', 'Status': 'Verified'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="window.print()"><i class="bi bi-printer"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">DPR-20241028-02</td>
+                <td>
+                  <div class="fw-bold text-dark">28-Oct-2024 (Today)</div>
+                  <div class="small text-muted"><i class="bi bi-cloud-sun text-info me-1"></i>Partly Cloudy, 26Â°C</div>
+                </td>
+                <td>
+                  <div class="fw-bold text-dark">CyberTower B (PRJ-2024-002)</div>
+                  <div class="small text-muted">Core Wing B (14th Floor)</div>
+                </td>
+                <td>K. Srinivas (Site Eng)</td>
+                <td><span class="fw-bold text-dark">230 Labour</span> (115 Skilled)</td>
+                <td>
+                  <div>Internal electrical conduit laying (12th floor).</div>
+                  <div class="small text-muted">AAC block masonry 13th floor corridor.</div>
+                </td>
+                <td>120 Cum AAC Blocks &bull; 150 Bags Mortar</td>
+                <td><span class="text-warning small fw-semibold">RMC Transit delay (40m)</span></td>
+                <td><span class="badge bg-warning text-dark">Submitted</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('DPR-20241028-02 CyberTower', {'Labour': '230', 'Concrete': '120 Cum Blocks'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="window.print()"><i class="bi bi-printer"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">DPR-20241028-03</td>
+                <td>
+                  <div class="fw-bold text-dark">28-Oct-2024 (Today)</div>
+                  <div class="small text-muted"><i class="bi bi-sun text-warning me-1"></i>Sunny, 33Â°C</div>
+                </td>
+                <td>
+                  <div class="fw-bold text-dark">NH48 Expressway (PRJ-2024-004)</div>
+                  <div class="small text-muted">Chainage 132+000 (Pier P-14)</div>
+                </td>
+                <td>Deepak Chauhan</td>
+                <td><span class="fw-bold text-dark">310 Labour</span> (160 Skilled)</td>
+                <td>
+                  <div>Pier cap reinforcement cage lowering.</div>
+                  <div class="small text-muted">Segmental precast girder tensioning.</div>
+                </td>
+                <td>280 Cum M45 High Performance Concrete</td>
+                <td><span class="text-success small fw-semibold">Nil / Smooth Pouring</span></td>
+                <td><span class="badge-status active">Verified by PM</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('DPR-20241028-03 NH48', {'Concrete': '280 Cum M45', 'Labour': '310'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="window.print()"><i class="bi bi-printer"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Create DPR Modal -->
+      <div class="modal fade" id="createDPRModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-journal-plus text-primary me-2"></i>Daily Progress Report Entry</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="createDPRForm">
+              <div class="modal-body">
+                <div class="row g-3 mb-3">
+                  <div class="col-md-4">
+                    <label class="form-label">DPR Number</label>
+                    <input type="text" class="form-control" value="DPR-20241028-04" readonly>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Site Wing / Project <span class="text-danger">*</span></label>
+                    <select class="form-select" required>
+                      <option>Skylark Heights - Tower 1</option>
+                      <option>CyberTower B - Wing B</option>
+                      <option>LogisticHub Pune - PEB Bay</option>
+                      <option>NH48 Expressway - Pier 14</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Site Weather</label>
+                    <input type="text" class="form-control" value="Sunny &bull; 32Â°C &bull; Clear">
+                  </div>
+
+                  <div class="col-md-12">
+                    <label class="form-label">Detailed Work Accomplished Today <span class="text-danger">*</span></label>
+                    <textarea class="form-control" rows="3" placeholder="Quantify activities: e.g. 240 Cum M35 concrete poured, 18 MT rebar tied, 120 sq.m internal plaster" required></textarea>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">Total Labour Deployed</label>
+                    <input type="number" class="form-control" value="145">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Concrete Poured (Cum)</label>
+                    <input type="number" class="form-control" value="65">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Steel Rebar Tied (MT)</label>
+                    <input type="number" class="form-control" value="8.5">
+                  </div>
+
+                  <div class="col-md-12">
+                    <label class="form-label">Hindrances / Delays / Accidents</label>
+                    <input type="text" class="form-control" placeholder="Nil or describe material delay / weather hindrance">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Submit DPR to Project Manager</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+
+<script>
+    document.getElementById('createDPRForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      bootstrap.Modal.getInstance(document.getElementById('createDPRModal')).hide();
+      BuildProApp.showToast('Daily Progress Report DPR-20241028-04 submitted and logged in site archive!', 'success');
+    });
+  </script>
+
+<?php require_once $includes_path . 'footer.php'; ?>

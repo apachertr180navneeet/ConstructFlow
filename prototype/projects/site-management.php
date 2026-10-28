@@ -1,0 +1,256 @@
+﻿<?php
+$page_title = "Site Management";
+$active_page = "site-management";
+require_once __DIR__ . '/../includes/config.php';
+require_once $includes_path . 'header.php';
+require_once $includes_path . 'sidebar.php';
+?>
+
+<div class="erp-main">
+  <?php require_once $includes_path . 'topbar.php'; ?>
+
+
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.php">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="project-list.php">Projects &amp; Sites</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Site Operations</span>
+          </div>
+          <h1>Construction Site Management &amp; Geofencing</h1>
+          <p class="erp-page-desc">Track geographical site boundaries, on-site storage hubs, batching plants, safety zones and field supervision teams.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#addSiteModal">
+            <i class="bi bi-plus-circle"></i> Add Site Wing
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('sites-table', 'BuildPro_Sites_Directory')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- Site Metrics -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Active Construction Sites</div>
+                <div class="erp-stat-value">15 Site Wings</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-geo-alt"></i> Across 4 Mega Contracts</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-pin-map"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Live Geofenced Workers</div>
+                <div class="erp-stat-value">1,397 Labour</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-shield-check"></i> 100% Inside Boundary</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-people"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Connected CCTV Streams</div>
+                <div class="erp-stat-value">48 Cameras</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-camera-video"></i> Live Feed Stream</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-camera-video"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Dedicated Store Yards</div>
+                <div class="erp-stat-value">8 Stores</div>
+                <div class="erp-stat-trend trend-neutral"><i class="bi bi-boxes"></i> RFID Enabled</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-box-seam"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search site wing, location, in-charge...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All Sites</option>
+              <option value="active">Active Pouring</option>
+              <option value="finishing">Finishing Work</option>
+              <option value="mobilization">Mobilization</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sites Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="sites-table">
+            <thead>
+              <tr>
+                <th>Site Code</th>
+                <th>Site Wing &amp; Project Name</th>
+                <th>Physical Location</th>
+                <th>Site In-Charge Engineer</th>
+                <th>Storekeeper</th>
+                <th>Active Workforce</th>
+                <th>GPS Coordinates</th>
+                <th>CCTV / IoT</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">SITE-SKL-01</td>
+                <td>
+                  <div class="fw-bold text-dark">Tower 1 &amp; 2 High-Rise Zone</div>
+                  <div class="small text-muted">Skylark Heights (PRJ-2024-001)</div>
+                </td>
+                <td>Worli Seaface, Mumbai</td>
+                <td>Mahesh Kadam (Site Engg)</td>
+                <td>Suresh Pal</td>
+                <td class="fw-bold">142 Labour</td>
+                <td class="small text-muted">19.0176Â° N, 72.8156Â° E</td>
+                <td><span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-camera-video me-1"></i>8 Live Cams</span></td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Site Wing: Tower 1 & 2', {'Project': 'Skylark Heights', 'In-Charge': 'Mahesh Kadam', 'Location': 'Worli, Mumbai', 'Labour': '142', 'Coordinates': '19.0176 N, 72.8156 E'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm delete" onclick="BuildProApp.confirmDelete('Site Wing SITE-SKL-01')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">SITE-SKL-02</td>
+                <td>
+                  <div class="fw-bold text-dark">Podium &amp; Central Clubhouse Wing</div>
+                  <div class="small text-muted">Skylark Heights (PRJ-2024-001)</div>
+                </td>
+                <td>Worli Seaface, Mumbai</td>
+                <td>Nitin Jadhav</td>
+                <td>Suresh Pal</td>
+                <td class="fw-bold">88 Labour</td>
+                <td class="small text-muted">19.0180Â° N, 72.8162Â° E</td>
+                <td><span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-camera-video me-1"></i>4 Live Cams</span></td>
+                <td><span class="badge-status in-progress">Finishing</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Site Wing: Podium Clubhouse', {'Project': 'Skylark Heights', 'In-Charge': 'Nitin Jadhav', 'Labour': '88'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm delete" onclick="BuildProApp.confirmDelete('Site Wing SITE-SKL-02')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">SITE-CYB-01</td>
+                <td>
+                  <div class="fw-bold text-dark">CyberTower Core Wing A (G+18)</div>
+                  <div class="small text-muted">CyberTower B (PRJ-2024-002)</div>
+                </td>
+                <td>Whitefield, Bengaluru</td>
+                <td>K. Srinivas</td>
+                <td>Basavaraj M.</td>
+                <td class="fw-bold">230 Labour</td>
+                <td class="small text-muted">12.9698Â° N, 77.7499Â° E</td>
+                <td><span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-camera-video me-1"></i>12 Live Cams</span></td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Site Wing: CyberTower Core', {'Project': 'CyberTower B', 'In-Charge': 'K. Srinivas', 'Labour': '230'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm delete" onclick="BuildProApp.confirmDelete('Site Wing SITE-CYB-01')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">SITE-NH48-03</td>
+                <td>
+                  <div class="fw-bold text-dark">Flyover Pier Casting Yard (Ch 132+000)</div>
+                  <div class="small text-muted">NH48 Expressway (PRJ-2024-004)</div>
+                </td>
+                <td>Vadodara Bypass, Gujarat</td>
+                <td>Deepak Chauhan</td>
+                <td>Ramanlal Patel</td>
+                <td class="fw-bold">310 Labour</td>
+                <td class="small text-muted">22.3072Â° N, 73.1812Â° E</td>
+                <td><span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-camera-video me-1"></i>16 Live Cams</span></td>
+                <td><span class="badge-status active">Active</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('Site Wing: Casting Yard', {'Project': 'NH48 Expressway', 'In-Charge': 'Deepak Chauhan', 'Labour': '310'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm delete" onclick="BuildProApp.confirmDelete('Site Wing SITE-NH48-03')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Add Site Wing Modal -->
+      <div class="modal fade" id="addSiteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-pin-map text-primary me-2"></i>Add New Construction Site Wing</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addSiteForm">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label">Parent Project <span class="text-danger">*</span></label>
+                  <select class="form-select" required>
+                    <option value="PRJ-2024-001">PRJ-2024-001 : Skylark Heights, Mumbai</option>
+                    <option value="PRJ-2024-002">PRJ-2024-002 : CyberTower B, Bengaluru</option>
+                    <option value="PRJ-2024-003">PRJ-2024-003 : LogisticHub, Pune</option>
+                    <option value="PRJ-2024-004">PRJ-2024-004 : NH48 Expressway, Gujarat</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Site Wing / Sector Title <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="e.g. Tower 3 North Sub-structure" required>
+                </div>
+                <div class="row g-2 mb-3">
+                  <div class="col-6">
+                    <label class="form-label">Site In-Charge Engineer</label>
+                    <input type="text" class="form-control" placeholder="Engineer Name">
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Storekeeper</label>
+                    <input type="text" class="form-control" placeholder="Storekeeper Name">
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">GPS Geofence Center (Lat, Long)</label>
+                  <input type="text" class="form-control" placeholder="e.g. 19.0176, 72.8156">
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Register Site Wing</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+
+<script>
+    document.getElementById('addSiteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var modal = bootstrap.Modal.getInstance(document.getElementById('addSiteModal'));
+      modal.hide();
+      BuildProApp.showToast('Site Wing added to project roster successfully!', 'success');
+    });
+  </script>
+
+<?php require_once $includes_path . 'footer.php'; ?>

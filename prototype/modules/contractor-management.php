@@ -1,0 +1,248 @@
+﻿<?php
+$page_title = "Contractor Management &amp; RA Bills";
+$active_page = "contractor-management";
+require_once __DIR__ . '/../includes/config.php';
+require_once $includes_path . 'header.php';
+require_once $includes_path . 'sidebar.php';
+?>
+
+<div class="erp-main">
+  <?php require_once $includes_path . 'topbar.php'; ?>
+
+
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.php">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Workforce &amp; Subcontractors</span>
+            <i class="bi bi-chevron-right"></i>
+            <span>Contractors &amp; RA Bills</span>
+          </div>
+          <h1>Subcontractor Management &amp; RA Bills</h1>
+          <p class="erp-page-desc">Track subcontractor work orders, joint measurements, Running Account (RA) bills, retention deductions and net disbursements.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#newRABillModal">
+            <i class="bi bi-receipt"></i> Process Contractor RA Bill
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('contractor-table', 'BuildPro_Contractor_RA_Bills')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- 4 KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Active Subcontracts</div>
+                <div class="erp-stat-value">28 Packages</div>
+                <div class="erp-stat-trend trend-up">Civil, MEP, Glazing, Waterproofing</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-person-badge"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Total Subcontract Value</div>
+                <div class="erp-stat-value">â‚¹ 184.50 Cr</div>
+                <div class="erp-stat-trend trend-neutral">Orderbook Allocated</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-cash-stack"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Retention Money Held</div>
+                <div class="erp-stat-value">â‚¹ 6.42 Cr</div>
+                <div class="erp-stat-trend trend-neutral"><i class="bi bi-shield-lock"></i> 5% Held for DLP Warranty</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-lock"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Pending RA Bills</div>
+                <div class="erp-stat-value">â‚¹ 4.15 Cr</div>
+                <div class="erp-stat-trend trend-down">6 Bills Under Joint Measurement</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-hourglass-split"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search contractor, package, WO ref...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All Bill Statuses</option>
+              <option value="Approved">Certified &amp; Approved</option>
+              <option value="Under Review">Under Measurement Review</option>
+              <option value="Paid">Disbursed / Paid</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Contractors Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="contractor-table">
+            <thead>
+              <tr>
+                <th>Bill No &amp; WO Ref</th>
+                <th>Contractor Company Name</th>
+                <th>Work Trade Package</th>
+                <th>Project &amp; Site</th>
+                <th>Gross Bill (â‚¹)</th>
+                <th>Retention (5%)</th>
+                <th>TDS Deductions</th>
+                <th>Net Payable (â‚¹)</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">
+                  <div>CRA-2024-042</div>
+                  <div class="small text-muted">WO-SKL-CIV-04</div>
+                </td>
+                <td>
+                  <div class="fw-bold text-dark">Modern Formwork &amp; Shuttering LLP</div>
+                  <div class="small text-muted">GSTIN: 27AABCM9102K1ZX</div>
+                </td>
+                <td>Mivan Aluminium Formwork (Tower 1 &amp; 2)</td>
+                <td>Skylark Heights</td>
+                <td class="fw-bold text-dark">â‚¹ 48,20,000</td>
+                <td>- â‚¹ 2,41,000</td>
+                <td>- â‚¹ 96,400</td>
+                <td class="fw-bold text-success">â‚¹ 44,82,600</td>
+                <td><span class="badge bg-warning text-dark">Under Review</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('CRA-2024-042 Modern Formwork', {'Contractor': 'Modern Formwork LLP', 'Gross': 'â‚¹ 48,20,000', 'Retention': 'â‚¹ 2,41,000', 'Net': 'â‚¹ 44,82,600'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Approve RA Bill', 'info')"><i class="bi bi-check-lg"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">
+                  <div>CRA-2024-041</div>
+                  <div class="small text-muted">WO-SKL-STL-02</div>
+                </td>
+                <td>
+                  <div class="fw-bold text-dark">Shree Balaji Bar Bending Works</div>
+                  <div class="small text-muted">GSTIN: 27AACCS4819M1Z8</div>
+                </td>
+                <td>Rebar Cutting &amp; Fabrication (Tower 1)</td>
+                <td>Skylark Heights</td>
+                <td class="fw-bold text-dark">â‚¹ 32,50,000</td>
+                <td>- â‚¹ 1,62,500</td>
+                <td>- â‚¹ 65,000</td>
+                <td class="fw-bold text-success">â‚¹ 30,22,500</td>
+                <td><span class="badge-status active">Certified / Approved</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('CRA-2024-041 Shree Balaji', {'Net Payable': 'â‚¹ 30,22,500', 'Status': 'Certified'})"><i class="bi bi-eye"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">
+                  <div>CRA-2024-040</div>
+                  <div class="small text-muted">WO-CYB-GLZ-01</div>
+                </td>
+                <td>
+                  <div class="fw-bold text-dark">Skyline Glazing &amp; Facades Ltd.</div>
+                  <div class="small text-muted">GSTIN: 29AAACS8819L1Z2</div>
+                </td>
+                <td>Unitized Curtain Wall Glazing (Phase 1)</td>
+                <td>CyberTower B</td>
+                <td class="fw-bold text-dark">â‚¹ 85,00,000</td>
+                <td>- â‚¹ 4,25,000</td>
+                <td>- â‚¹ 1,70,000</td>
+                <td class="fw-bold text-success">â‚¹ 79,05,000</td>
+                <td><span class="badge-status completed">Paid / Disbursed</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('CRA-2024-040 Skyline Glazing', {'Status': 'Paid', 'Disbursed': 'â‚¹ 79,05,000'})"><i class="bi bi-eye"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- New RA Bill Modal -->
+      <div class="modal fade" id="newRABillModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-receipt text-primary me-2"></i>Record Subcontractor RA Bill</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="newRABillForm">
+              <div class="modal-body">
+                <div class="row g-3 mb-3">
+                  <div class="col-md-4">
+                    <label class="form-label">RA Bill Number <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="CRA-2024-043" readonly>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Subcontractor <span class="text-danger">*</span></label>
+                    <select class="form-select" required>
+                      <option>Modern Formwork &amp; Shuttering LLP</option>
+                      <option>Shree Balaji Bar Bending Works</option>
+                      <option>Skyline Glazing &amp; Facades Ltd.</option>
+                      <option>Sterling Electricals &amp; MEP</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Work Order Ref</label>
+                    <input type="text" class="form-control" value="WO-SKL-CIV-04">
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">Gross Measured Amount (â‚¹) <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="2500000" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Retention Deduction (%)</label>
+                    <input type="text" class="form-control" value="5% (Standard DLP)" readonly>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">TDS Rate</label>
+                    <input type="text" class="form-control" value="2% u/s 194C" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Submit RA Bill for Verification</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+
+<script>
+    document.getElementById('newRABillForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      bootstrap.Modal.getInstance(document.getElementById('newRABillModal')).hide();
+      BuildProApp.showToast('Contractor RA bill submitted for joint measurement check!', 'success');
+    });
+  </script>
+
+<?php require_once $includes_path . 'footer.php'; ?>

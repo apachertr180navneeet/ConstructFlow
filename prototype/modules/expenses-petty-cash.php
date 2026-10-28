@@ -1,0 +1,244 @@
+﻿<?php
+$page_title = "Expenses &amp; Petty Cash";
+$active_page = "expenses-petty-cash";
+require_once __DIR__ . '/../includes/config.php';
+require_once $includes_path . 'header.php';
+require_once $includes_path . 'sidebar.php';
+?>
+
+<div class="erp-main">
+  <?php require_once $includes_path . 'topbar.php'; ?>
+
+
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.php">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Finance &amp; Accounts</span>
+            <i class="bi bi-chevron-right"></i>
+            <span>Petty Cash</span>
+          </div>
+          <h1>Site Petty Cash, Imprest &amp; Field Expense Vouchers</h1>
+          <p class="erp-page-desc">Track field cashier imprest balances, emergency site purchases, transport vouchers, site mess expenses and cash reconciliations.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#newExpenseModal">
+            <i class="bi bi-plus-circle"></i> Record Cash Voucher
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('expense-table', 'BuildPro_Petty_Cash_Register')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- 4 KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Total Active Imprest Float</div>
+                <div class="erp-stat-value">â‚¹ 14.50 Lakh</div>
+                <div class="erp-stat-trend trend-neutral">Allocated across 8 Field Sites</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-wallet2"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Cash in Hand Balance</div>
+                <div class="erp-stat-value">â‚¹ 4.82 Lakh</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> Reconciled Yesterday</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-cash"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Expenses Logged (MTD)</div>
+                <div class="erp-stat-value">â‚¹ 9.68 Lakh</div>
+                <div class="erp-stat-trend trend-neutral">Fuel, Local Hardware, Courier</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-receipt"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Top-Up Requests Pending</div>
+                <div class="erp-stat-value">2 Sites</div>
+                <div class="erp-stat-trend trend-down"><i class="bi bi-arrow-up-circle"></i> Skylark &amp; Vadodara</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-credit-card-2-front"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search voucher #, cashier, expense category...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All Categories</option>
+              <option value="Fuel">Fuel &amp; Small Genset</option>
+              <option value="Hardware">Local Hardware / Consumables</option>
+              <option value="Transport">Local Transport &amp; Auto</option>
+              <option value="Mess">Site Mess &amp; Hospitality</option>
+            </select>
+          </div>
+          <div class="erp-toolbar-actions">
+            <button class="btn btn-sm btn-outline-success" onclick="BuildProApp.showToast('Imprest float replenished via corporate current account!', 'success')">
+              <i class="bi bi-arrow-clockwise me-1"></i> Replenish Imprest Float
+            </button>
+          </div>
+        </div>
+
+        <!-- Petty Cash Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="expense-table">
+            <thead>
+              <tr>
+                <th>Voucher No.</th>
+                <th>Expense Date</th>
+                <th>Site &amp; Cashier In-Charge</th>
+                <th>Expense Category</th>
+                <th>Purpose &amp; Description</th>
+                <th>Vendor / Payee</th>
+                <th>Amount (â‚¹)</th>
+                <th>GST Bill / Slip</th>
+                <th>Approval Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">PCV-SKL-042</td>
+                <td>28-Oct-2024</td>
+                <td>
+                  <div class="fw-bold text-dark">Skylark Heights Yard A</div>
+                  <div class="small text-muted">Cashier: Santosh Mishra</div>
+                </td>
+                <td><span class="badge bg-primary-subtle text-primary">Emergency Hardware</span></td>
+                <td>High-tensile binding wire rolls (20 kg) &amp; cutting discs</td>
+                <td>Laxmi Hardware &amp; Tools, Worli</td>
+                <td class="fw-bold text-dark">â‚¹ 4,850</td>
+                <td><span class="badge bg-light text-dark border"><i class="bi bi-receipt"></i> Bill #1489 Attached</span></td>
+                <td><span class="badge-status active">Approved by PM</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('PCV-SKL-042', {'Category': 'Hardware', 'Amount': 'â‚¹ 4,850', 'Payee': 'Laxmi Hardware'})"><i class="bi bi-eye"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">PCV-CYB-019</td>
+                <td>27-Oct-2024</td>
+                <td>
+                  <div class="fw-bold text-dark">CyberTower B Hub</div>
+                  <div class="small text-muted">Cashier: B. N. Murthy</div>
+                </td>
+                <td><span class="badge bg-warning-subtle text-warning">Fuel / Transit</span></td>
+                <td>Emergency Diesel can for 10 kVA lighting tower</td>
+                <td>HP Petrol Pump, Whitefield</td>
+                <td class="fw-bold text-dark">â‚¹ 3,200</td>
+                <td><span class="badge bg-light text-dark border"><i class="bi bi-receipt"></i> Bill #8812</span></td>
+                <td><span class="badge-status active">Approved by PM</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('PCV-CYB-019', {'Amount': 'â‚¹ 3,200'})"><i class="bi bi-eye"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">PCV-NH48-061</td>
+                <td>26-Oct-2024</td>
+                <td>
+                  <div class="fw-bold text-dark">NH48 Casting Yard</div>
+                  <div class="small text-muted">Cashier: Nilesh Parmar</div>
+                </td>
+                <td><span class="badge bg-info-subtle text-info">Site Hospitality &amp; Water</span></td>
+                <td>Drinking water 20L camper cans for site labour (40 cans)</td>
+                <td>Bisleri Water Distributor</td>
+                <td class="fw-bold text-dark">â‚¹ 1,600</td>
+                <td><span class="badge bg-light text-dark border">Cash Memo</span></td>
+                <td><span class="badge-status completed">Reimbursed</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('PCV-NH48-061', {'Amount': 'â‚¹ 1,600'})"><i class="bi bi-eye"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Record Expense Modal -->
+      <div class="modal fade" id="newExpenseModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-receipt text-primary me-2"></i>Record Site Petty Cash Voucher</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="newExpenseForm">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label">Site Imprest Account <span class="text-danger">*</span></label>
+                  <select class="form-select" required>
+                    <option>Skylark Heights - Cash Float (Available: â‚¹ 48,200)</option>
+                    <option>CyberTower B - Cash Float (Available: â‚¹ 64,100)</option>
+                    <option>NH48 Expressway - Cash Float (Available: â‚¹ 32,800)</option>
+                  </select>
+                </div>
+                <div class="row g-2 mb-3">
+                  <div class="col-6">
+                    <label class="form-label">Expense Category</label>
+                    <select class="form-select">
+                      <option>Emergency Hardware / Consumables</option>
+                      <option>Fuel / Small Machinery</option>
+                      <option>Local Freight / Transport</option>
+                      <option>Drinking Water / Mess</option>
+                      <option>Postage &amp; Courier</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Amount (â‚¹) <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="2500" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Payee / Vendor Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="e.g. Royal Hardware Store" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Purpose &amp; Work Reference</label>
+                  <textarea class="form-control" rows="2" placeholder="Describe necessity of field cash purchase"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Commit Cash Voucher</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+
+<script>
+    document.getElementById('newExpenseForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      bootstrap.Modal.getInstance(document.getElementById('newExpenseModal')).hide();
+      BuildProApp.showToast('Petty cash voucher recorded and cash balance updated!', 'success');
+    });
+  </script>
+
+<?php require_once $includes_path . 'footer.php'; ?>
