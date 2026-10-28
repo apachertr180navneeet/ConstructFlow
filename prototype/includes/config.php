@@ -7,6 +7,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once __DIR__ . '/functions.php';
+
 // Compute relative root path based on directory depth from prototype root
 $script_path = str_replace('\\', '/', dirname($_SERVER['SCRIPT_FILENAME']));
 $includes_dir = str_replace('\\', '/', __DIR__);
