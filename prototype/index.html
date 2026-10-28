@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuildPro ERP - Construction Management System</title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-light">
+
+  <div class="container-fluid p-0">
+    <!-- Top Hero Banner with Real Generated Construction Visual -->
+    <div class="position-relative text-white" style="background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,58,138,0.85)), url('assets/images/construction_hero.jpg') center/cover no-repeat; min-height: 380px;">
+      <div class="container py-5">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-warning text-dark fw-bold mb-3 small">
+              <i class="bi bi-shield-check"></i> Enterprise Construction Management ERP &bull; v3.4.2
+            </div>
+            <h1 class="display-5 fw-bold mb-2">BuildPro Construction ERP</h1>
+            <p class="lead text-light opacity-90 mb-4" style="max-width: 680px;">
+              Integrated Enterprise Cloud for Civil Contractors, Infrastructure Developers &amp; Project Management Consultancies.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="dashboard.html" class="btn btn-warning btn-lg px-4 fw-bold text-dark shadow">
+                <i class="bi bi-speedometer2 me-2"></i>Enter Executive Dashboard
+              </a>
+              <a href="projects/project-list.html" class="btn btn-outline-light btn-lg px-4 fw-semibold">
+                <i class="bi bi-buildings me-2"></i>Projects Directory
+              </a>
+              <button type="button" class="btn btn-light btn-lg px-3 fw-semibold text-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <i class="bi bi-box-arrow-in-right me-1"></i>Sign In Portal
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block text-end">
+            <div class="card bg-white bg-opacity-10 border-white border-opacity-25 text-white p-3 backdrop-blur text-start shadow-lg">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="bg-warning text-dark p-2 rounded"><i class="bi bi-cone-striped fs-5"></i></div>
+                <div>
+                  <div class="fw-bold">BuildPro Construction Pvt. Ltd.</div>
+                  <div class="small text-light opacity-75">CIN: U45200MH2012PTC234567</div>
+                </div>
+              </div>
+              <hr class="border-light opacity-25 my-2">
+              <div class="row g-2 small">
+                <div class="col-6">Active Projects: <strong>4 Mega Sites</strong></div>
+                <div class="col-6">Contract Value: <strong>₹ 806.25 Cr</strong></div>
+                <div class="col-6">Site Workforce: <strong>1,397 Labour</strong></div>
+                <div class="col-6">Safety: <strong>Zero LTI (380d)</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Module Navigation Grid (All 30 Modules) -->
+    <div class="container py-5">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom">
+        <div>
+          <h2 class="h4 fw-bold text-dark mb-1">Interactive ERP Modules Gateway</h2>
+          <p class="text-muted small mb-0">Select any module below to jump directly into the full multi-page prototype with realistic data.</p>
+        </div>
+        <div class="d-flex gap-2">
+          <input type="text" id="module-search" class="form-control form-control-sm" placeholder="Filter 30 modules..." style="width: 240px;">
+          <a href="dashboard.html" class="btn btn-sm btn-primary"><i class="bi bi-arrow-right-circle me-1"></i>Open Dashboard</a>
+        </div>
+      </div>
+
+      <!-- Categories & Cards -->
+      <div class="row g-3" id="modules-container">
+
+        <!-- 1. Dashboard -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="dashboard analytics kpi executive">
+          <a href="dashboard.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-speedometer2 fs-4"></i></div>
+                <span class="badge bg-success">Live</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">1. Dashboard &amp; Analytics</h5>
+              <p class="card-text text-muted small">C-Suite metrics, financial KPIs, progress S-curve &amp; alerts.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 2. Company Settings -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="company administration profile settings branches gstin">
+          <a href="administration/company-settings.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-secondary-subtle text-secondary"><i class="bi bi-building-gear fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Admin</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">2. Company &amp; Admin</h5>
+              <p class="card-text text-muted small">Corporate entity setup, GST/PAN, branch offices &amp; financial years.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 3. Users & Roles -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="users access roles permissions acl rbac security">
+          <a href="administration/users-roles-permissions.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-info-subtle text-info"><i class="bi bi-shield-lock fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Security</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">3. Users &amp; Access Control</h5>
+              <p class="card-text text-muted small">Granular RBAC permissions, user directory &amp; site assignments.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 4. Client CRM -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="client crm customer relationship leads tenders inquiries">
+          <a href="clients/crm.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-person-rolodex fs-4"></i></div>
+                <span class="badge bg-light text-dark border">CRM</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">4. Client Management (CRM)</h5>
+              <p class="card-text text-muted small">Developer accounts, tender leads, key client contacts &amp; pipeline.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 5. Project Management -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="project management projects list create details">
+          <a href="projects/project-list.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-buildings fs-4"></i></div>
+                <span class="badge bg-primary">Core</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">5. Project Management</h5>
+              <p class="card-text text-muted small">Contract portfolio, budget variance, completion % &amp; milestones.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 6. Site Operations -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="site management operations location gps cctv geofencing">
+          <a href="projects/site-management.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-danger-subtle text-danger"><i class="bi bi-geo-alt fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Site Ops</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">6. Site Management</h5>
+              <p class="card-text text-muted small">Site offices, GPS geofencing, site store hubs &amp; in-charge engineers.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 7. Estimation & Tender -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="estimation tender bidding emd rates costing">
+          <a href="modules/estimation-tender.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-success-subtle text-success"><i class="bi bi-calculator fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Pre-con</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">7. Estimation &amp; Tender</h5>
+              <p class="card-text text-muted small">Rate analysis, EMD guarantees, bids tracking &amp; tender submissions.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 8. BOQ & Quantity Surveying -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="boq bill of quantities measurement quantity surveying mb item rate">
+          <a href="modules/boq-quantity-survey.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-table fs-4"></i></div>
+                <span class="badge bg-warning text-dark">Essential</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">8. BOQ &amp; Quantity Survey</h5>
+              <p class="card-text text-muted small">Itemized BOQ schedule, measurement book (MB), rate items &amp; balance.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 9. Planning & Scheduling -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="planning scheduling gantt cpm critical path milestones">
+          <a href="modules/planning-scheduling.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-info-subtle text-info"><i class="bi bi-calendar-week fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Schedule</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">9. Planning &amp; Scheduling</h5>
+              <p class="card-text text-muted small">WBS task schedules, CPM critical path, milestone tracker &amp; S-Curves.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 10. Purchase & Procurement -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="purchase procurement po requisition indent purchase order quotes">
+          <a href="modules/procurement.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-cart-check fs-4"></i></div>
+                <span class="badge bg-danger">8 Pending</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">10. Purchase &amp; Procurement</h5>
+              <p class="card-text text-muted small">Site indents, comparative quotations, PO issuance &amp; approvals.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 11. Vendors & Suppliers -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="vendors suppliers avl rating gstin msme bills">
+          <a href="modules/vendors-suppliers.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-secondary-subtle text-secondary"><i class="bi bi-truck fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Supply</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">11. Vendors &amp; Suppliers</h5>
+              <p class="card-text text-muted small">Approved Vendor List (AVL), performance ratings, GSTIN &amp; credit terms.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 12. Inventory & Materials -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="inventory materials stock grn warehouse store steel cement">
+          <a href="modules/inventory-materials.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-boxes fs-4"></i></div>
+                <span class="badge bg-warning text-dark">Stores</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">12. Inventory &amp; Materials</h5>
+              <p class="card-text text-muted small">Central stores, GRN stock ledger, minimum reorder alert &amp; valuations.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 13. Labour & Workforce -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="labour workforce attendance muster roll wages overtime">
+          <a href="modules/labour-workforce.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-success-subtle text-success"><i class="bi bi-people fs-4"></i></div>
+                <span class="badge bg-success">1,397 Active</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">13. Labour &amp; Workforce</h5>
+              <p class="card-text text-muted small">Daily site muster roll, overtime, trades (bar benders, masons) &amp; wages.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 14. Contractor Management -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="contractor subcontractor ra bills retention tds work order">
+          <a href="modules/contractor-management.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-person-badge fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Sub-Contract</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">14. Contractor Management</h5>
+              <p class="card-text text-muted small">Work orders, contractor RA bills, retention deductions &amp; recoveries.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 15. Equipment & Machinery -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="equipment machinery plant cranes batching plant fuel maintenance">
+          <a href="modules/equipment-machinery.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-danger-subtle text-danger"><i class="bi bi-tools fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Plant</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">15. Equipment &amp; Machinery</h5>
+              <p class="card-text text-muted small">Tower cranes, batching plants, diesel consumption logs &amp; servicing.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 16. Vehicle & Transport -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="vehicle transport fleet dumpers tippers logbook fastag">
+          <a href="modules/vehicle-transport.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-info-subtle text-info"><i class="bi bi-ev-front fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Fleet</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">16. Vehicle &amp; Transport</h5>
+              <p class="card-text text-muted small">Dumpers, transit mixers, PUC/insurance renewals &amp; driver trip sheets.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 17. Daily Progress DPR -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="daily progress dpr site operations hindrances photos weather">
+          <a href="modules/daily-progress.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-journal-check fs-4"></i></div>
+                <span class="badge bg-warning text-dark">Today's DPR</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">17. Daily Progress (DPR)</h5>
+              <p class="card-text text-muted small">Field logbook, work accomplished, daily photos &amp; hindrances record.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 18. Quality Control QA/QC -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="quality control qa qc concrete cube test slump ncr itp">
+          <a href="modules/quality-control.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-success-subtle text-success"><i class="bi bi-check2-circle fs-4"></i></div>
+                <span class="badge bg-light text-dark border">QA/QC</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">18. Quality Control (QA/QC)</h5>
+              <p class="card-text text-muted small">Cube strength tests, slump checks, steel reports &amp; NCR snags.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 19. Safety & Compliance HSE -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="safety compliance hse ppe toolbox talk incident lti">
+          <a href="modules/safety-compliance.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-danger-subtle text-danger"><i class="bi bi-shield-check fs-4"></i></div>
+                <span class="badge bg-success">Zero LTI</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">19. Safety &amp; Compliance</h5>
+              <p class="card-text text-muted small">HSE incident reports, toolbox talks (TBT), PPE audits &amp; safe hours.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 20. Client Billing & Receivables -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="client billing receivables ra bill invoice gst retention">
+          <a href="modules/client-billing.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-receipt-cutoff fs-4"></i></div>
+                <span class="badge bg-primary">Billing</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">20. Client Billing &amp; Invoices</h5>
+              <p class="card-text text-muted small">Client RA bills, joint measurement certification, GST tax invoices.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 21. Finance & Accounting -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="finance accounting ledger vouchers journal cashbook trial balance">
+          <a href="modules/finance-accounting.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-success-subtle text-success"><i class="bi bi-cash-coin fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Accounts</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">21. Finance &amp; Accounting</h5>
+              <p class="card-text text-muted small">Chart of accounts, general ledger, payment vouchers &amp; bank ledger.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 22. Expenses & Petty Cash -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="expenses petty cash imprest site vouchers field purchases">
+          <a href="modules/expenses-petty-cash.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-secondary-subtle text-secondary"><i class="bi bi-wallet2 fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Cashier</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">22. Expenses &amp; Petty Cash</h5>
+              <p class="card-text text-muted small">Site cashier imprest accounts, cash vouchers &amp; field expense claims.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 23. Budget & Cost Control -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="budget cost control variance ctc earned value bcws acwp">
+          <a href="modules/budget-cost-control.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-pie-chart fs-4"></i></div>
+                <span class="badge bg-warning text-dark">Commercial</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">23. Budget &amp; Cost Control</h5>
+              <p class="card-text text-muted small">Earned Value Analysis (EVA), committed cost vs actual, CTC projections.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 24. HR & Payroll -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="hr payroll staff salary pf esi leaves engineers">
+          <a href="modules/hr-payroll.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-info-subtle text-info"><i class="bi bi-person-lines-fill fs-4"></i></div>
+                <span class="badge bg-light text-dark border">HRM</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">24. HR &amp; Staff Payroll</h5>
+              <p class="card-text text-muted small">Staff roster, salary structure, PF/ESI statutory compliance &amp; leaves.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 25. Documents & Drawings EDMS -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="documents drawings edms architectural structural revision gfc">
+          <a href="modules/documents-drawings.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-primary-subtle text-primary"><i class="bi bi-folder2-open fs-4"></i></div>
+                <span class="badge bg-light text-dark border">EDMS</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">25. Documents &amp; Drawings</h5>
+              <p class="card-text text-muted small">Architectural blueprints, GFC stamps, revision history &amp; transmittals.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 26. Approvals & Workflow -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="approvals workflow matrix requests signoffs authorization">
+          <a href="modules/approvals-workflow.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-danger-subtle text-danger"><i class="bi bi-diagram-3 fs-4"></i></div>
+                <span class="badge bg-danger">5 Pending</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">26. Approvals &amp; Workflow</h5>
+              <p class="card-text text-muted small">Tier-based approval hierarchy for POs, variation orders &amp; payments.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 27. Reports & MIS -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="reports mis analytics executive export pdf excel">
+          <a href="modules/reports-mis.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-success-subtle text-success"><i class="bi bi-bar-chart-line fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Analytics</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">27. Reports &amp; MIS</h5>
+              <p class="card-text text-muted small">Monthly project review (MPR), material consumption &amp; cash flows.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 28. Maintenance & Defects DLP -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="maintenance defects dlp snag list warranty handover">
+          <a href="modules/maintenance-defects.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-warning-subtle text-warning"><i class="bi bi-exclamation-triangle fs-4"></i></div>
+                <span class="badge bg-light text-dark border">DLP</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">28. Maintenance &amp; Defects</h5>
+              <p class="card-text text-muted small">Snag lists, defect liability tracking, warranty &amp; client handovers.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 29. Notifications & Communication -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="notifications communication alerts site broadcast weather sms">
+          <a href="modules/notifications-communication.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-info-subtle text-info"><i class="bi bi-bell fs-4"></i></div>
+                <span class="badge bg-light text-dark border">Broadcast</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">29. Notifications &amp; Alerts</h5>
+              <p class="card-text text-muted small">Site hazard alerts, critical material shortages &amp; team broadcasts.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- 30. System Integration, Backup & Audit -->
+        <div class="col-md-4 col-lg-3 module-item" data-name="system integration backup audit logs tally api biometric">
+          <a href="modules/integrations-audit-backup.html" class="card h-100 text-decoration-none border shadow-sm erp-module-card hover-lift">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="p-2 rounded bg-secondary-subtle text-secondary"><i class="bi bi-database-check fs-4"></i></div>
+                <span class="badge bg-success">Healthy</span>
+              </div>
+              <h5 class="card-title text-dark fw-bold h6 mb-1">30. Integration &amp; Audit</h5>
+              <p class="card-text text-muted small">Database snapshots, Tally ERP sync, biometric logs &amp; security trail.</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign In Demo Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content shadow-lg border-0">
+        <div class="modal-header bg-dark text-white p-3">
+          <h5 class="modal-title h6"><i class="bi bi-shield-lock me-2 text-warning"></i>ERP Staff Sign In</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Company Domain</label>
+            <input type="text" class="form-control form-control-sm" value="buildpro-erp.in" readonly>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Work Email / User ID</label>
+            <input type="email" class="form-control form-control-sm" value="navneet@buildpro-erp.in">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Password</label>
+            <input type="password" class="form-control form-control-sm" value="••••••••••••">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Select Active Role</label>
+            <select class="form-select form-select-sm">
+              <option selected>Senior Project Director / Super Admin</option>
+              <option>Project Manager (Site Level)</option>
+              <option>Chief Billing &amp; QS Engineer</option>
+              <option>Procurement Head</option>
+              <option>Site HSE Safety Officer</option>
+            </select>
+          </div>
+          <a href="dashboard.html" class="btn btn-warning w-100 fw-bold text-dark">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Launch Session
+          </a>
+        </div>
+        <div class="modal-footer bg-light p-2 text-center justify-content-center">
+          <small class="text-muted" style="font-size:0.75rem;">BuildPro Cloud v3.4.2 &bull; Prototype Environment</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Live filter on gateway page
+    document.getElementById('module-search').addEventListener('input', function() {
+      var query = this.value.toLowerCase().trim();
+      var items = document.querySelectorAll('.module-item');
+      items.forEach(function(item) {
+        var text = item.getAttribute('data-name') || '';
+        if (!query || text.indexOf(query) !== -1) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
