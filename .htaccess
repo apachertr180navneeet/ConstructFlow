@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# If a .html file is requested at root level, rewrite to prototype/.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.html$ prototype/$1.php [L,QSA]
+</IfModule>

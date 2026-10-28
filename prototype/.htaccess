@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# If a .html file is requested, rewrite to .php equivalent
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.html$ $1.php [L,QSA]
+</IfModule>

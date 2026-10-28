@@ -414,6 +414,18 @@ window.BuildProApp = (function() {
       });
     }
 
+    // Automatic link normalizer: intercepts any link with .html and routes according to .php flow
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (href && href.indexOf('.html') !== -1 && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('javascript:')) {
+        e.preventDefault();
+        var cleanHref = href.replace(/\.html(\b|#|\?)/, '.php$1');
+        window.location.href = cleanHref;
+      }
+    });
+
     // Global Project Switcher
     var projectSelect = document.getElementById('global-project-select');
     if (projectSelect) {

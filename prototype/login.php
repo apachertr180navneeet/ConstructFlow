@@ -6,9 +6,10 @@
 $skip_auth = true;
 require_once __DIR__ . '/includes/config.php';
 
-// If already logged in, redirect to dashboard
+// If already logged in, redirect to dashboard or sanitized target
 if (isset($_SESSION['buildpro_user'])) {
-    header("Location: dashboard.php");
+    $target = str_replace('.html', '.php', $_GET['redirect'] ?? 'dashboard.php');
+    header("Location: " . $target);
     exit;
 }
 
@@ -81,7 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['buildpro_user'] = $selected_persona;
         $_SESSION['current_project'] = 'PRJ-2024-001';
-        header("Location: dashboard.php");
+        $redirect_to = str_replace('.html', '.php', $_POST['redirect'] ?? ($_GET['redirect'] ?? 'dashboard.php'));
+        header("Location: " . $redirect_to);
         exit;
     } else {
         $error_message = 'Please enter a valid work email address.';
