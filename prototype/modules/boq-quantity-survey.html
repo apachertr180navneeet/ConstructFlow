@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOQ &amp; Quantity Surveying - BuildPro Construction ERP</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="erp-body" data-root="../" data-page="boq-quantity-survey">
+
+  <div class="erp-wrapper">
+    <aside class="erp-sidebar" id="app-sidebar"></aside>
+
+    <div class="erp-main">
+      <header class="erp-topbar" id="app-topbar"></header>
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Commercial &amp; Estimation</span>
+            <i class="bi bi-chevron-right"></i>
+            <span>Quantity Surveying</span>
+          </div>
+          <h1>Bill of Quantities (BOQ) &amp; Measurement Book (MB)</h1>
+          <p class="erp-page-desc">Comprehensive itemized bill of quantities, tender rates, joint measurement records (JMR) and executed valuations.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#addBOQModal">
+            <i class="bi bi-plus-circle"></i> Add BOQ Line Item
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('boq-table', 'BuildPro_BOQ_Execution')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- 4 KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Tender BOQ Sum</div>
+                <div class="erp-stat-value">₹ 142.50 Cr</div>
+                <div class="erp-stat-trend trend-neutral">PRJ-2024-001 Skylark Heights</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-table"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Executed Measurement</div>
+                <div class="erp-stat-value">₹ 105.73 Cr</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> 74.2% Work Certified</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-rulers"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Unexecuted Balance</div>
+                <div class="erp-stat-value">₹ 36.77 Cr</div>
+                <div class="erp-stat-trend trend-neutral">Finishing &amp; MEP items</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-hourglass-split"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Total BOQ Items</div>
+                <div class="erp-stat-value">184 Items</div>
+                <div class="erp-stat-trend trend-up">Civil, Structural, MEP, Finishes</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-list-check"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search item code, description, MB page...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All Disciplines</option>
+              <option value="Civil">Civil Structure</option>
+              <option value="Reinforcement">Steel &amp; Rebars</option>
+              <option value="Finishing">Internal Finishes</option>
+              <option value="MEP">MEP &amp; Electrical</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- BOQ Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="boq-table">
+            <thead>
+              <tr>
+                <th>Item Code</th>
+                <th>Work Discipline &amp; Technical Description</th>
+                <th>Unit</th>
+                <th>Tender Qty</th>
+                <th>Executed Qty</th>
+                <th>Balance Qty</th>
+                <th>Tender Rate</th>
+                <th>Executed Value</th>
+                <th>MB Ref</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">BOQ-CIV-001</td>
+                <td>
+                  <div class="fw-bold text-dark">Earthwork excavation in all soils &amp; soft rock up to 12m depth</div>
+                  <div class="small text-muted">Discipline: Civil Substructure</div>
+                </td>
+                <td>Cum</td>
+                <td>65,000</td>
+                <td>65,000</td>
+                <td>0</td>
+                <td>₹ 380</td>
+                <td class="fw-bold text-dark">₹ 2,47,00,000</td>
+                <td><span class="badge bg-light text-dark border">MB-01/P-14</span></td>
+                <td><span class="badge-status completed">100% Done</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('BOQ-CIV-001 Excavation', {'Unit': 'Cum', 'Tender Qty': '65,000', 'Rate': '₹ 380', 'MB Book': 'MB-01/P-14'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit BOQ line item', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">BOQ-CIV-002</td>
+                <td>
+                  <div class="fw-bold text-dark">Ready Mix Concrete (RMC) M35 in Raft Foundation &amp; Columns</div>
+                  <div class="small text-muted">Discipline: Civil Structure</div>
+                </td>
+                <td>Cum</td>
+                <td>24,000</td>
+                <td>18,450</td>
+                <td>5,550</td>
+                <td>₹ 6,850</td>
+                <td class="fw-bold text-dark">₹ 12,63,82,500</td>
+                <td><span class="badge bg-light text-dark border">MB-02/P-88</span></td>
+                <td><span class="badge-status in-progress">76.8% Done</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('BOQ-CIV-002 RMC M35', {'Executed': '18,450 Cum', 'Balance': '5,550 Cum', 'Valuation': '₹ 12.63 Cr'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit BOQ line item', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">BOQ-CIV-003</td>
+                <td>
+                  <div class="fw-bold text-dark">High Yield Strength Fe500D Thermo-Mechanically Treated (TMT) Rebars</div>
+                  <div class="small text-muted">Discipline: Reinforcement Steel</div>
+                </td>
+                <td>MT</td>
+                <td>4,200</td>
+                <td>3,120</td>
+                <td>1,080</td>
+                <td>₹ 68,500</td>
+                <td class="fw-bold text-dark">₹ 21,37,20,000</td>
+                <td><span class="badge bg-light text-dark border">MB-02/P-94</span></td>
+                <td><span class="badge-status in-progress">74.2% Done</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('BOQ-CIV-003 TMT Steel', {'Executed': '3,120 MT', 'Valuation': '₹ 21.37 Cr'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit BOQ line item', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">BOQ-CIV-004</td>
+                <td>
+                  <div class="fw-bold text-dark">Autoclaved Aerated Concrete (AAC) Block Masonry (200mm thk)</div>
+                  <div class="small text-muted">Discipline: Civil Masonry</div>
+                </td>
+                <td>Cum</td>
+                <td>7,500</td>
+                <td>4,800</td>
+                <td>2,700</td>
+                <td>₹ 4,200</td>
+                <td class="fw-bold text-dark">₹ 2,01,60,000</td>
+                <td><span class="badge bg-light text-dark border">MB-03/P-22</span></td>
+                <td><span class="badge-status in-progress">64.0% Done</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('BOQ-CIV-004 AAC Blocks', {'Executed': '4,800 Cum'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit BOQ line item', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">BOQ-FIN-001</td>
+                <td>
+                  <div class="fw-bold text-dark">Single coat 12mm internal Gypsum plaster with smooth trowel finish</div>
+                  <div class="small text-muted">Discipline: Finishing Plaster</div>
+                </td>
+                <td>Sq.m</td>
+                <td>85,000</td>
+                <td>48,200</td>
+                <td>36,800</td>
+                <td>₹ 240</td>
+                <td class="fw-bold text-dark">₹ 1,15,68,000</td>
+                <td><span class="badge bg-light text-dark border">MB-03/P-45</span></td>
+                <td><span class="badge-status in-progress">56.7% Done</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('BOQ-FIN-001 Gypsum', {'Executed': '48,200 Sq.m'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Edit BOQ line item', 'info')"><i class="bi bi-pencil"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Add BOQ Item Modal -->
+      <div class="modal fade" id="addBOQModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-plus-circle text-primary me-2"></i>Add BOQ Specification Line Item</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addBOQForm">
+              <div class="modal-body">
+                <div class="row g-3 mb-3">
+                  <div class="col-md-4">
+                    <label class="form-label">Item Code <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="BOQ-FIN-002" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Discipline</label>
+                    <select class="form-select">
+                      <option>Civil Structure</option>
+                      <option>Reinforcement Steel</option>
+                      <option>Finishing Plaster &amp; Paint</option>
+                      <option>Flooring &amp; Tiling</option>
+                      <option>MEP &amp; Plumbing</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Measurement Unit <span class="text-danger">*</span></label>
+                    <select class="form-select" required>
+                      <option>Cum (Cubic Meter)</option>
+                      <option>MT (Metric Ton)</option>
+                      <option>Sq.m (Square Meter)</option>
+                      <option>Sq.ft (Square Feet)</option>
+                      <option>Rmt (Running Meter)</option>
+                      <option>Nos (Numbers)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="form-label">Technical Specification Description <span class="text-danger">*</span></label>
+                    <textarea class="form-control" rows="2" placeholder="Full technical description as per tender specification" required></textarea>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Tender Estimated Qty <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="10000" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Tender Rate (₹) <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="450" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Initial MB Reference</label>
+                    <input type="text" class="form-control" placeholder="MB-04/P-01">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Append to BOQ</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer class="erp-footer" id="app-footer"></footer>
+    </div>
+  </div>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/prototype-data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    document.getElementById('addBOQForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      bootstrap.Modal.getInstance(document.getElementById('addBOQModal')).hide();
+      BuildProApp.showToast('BOQ line item added successfully!', 'success');
+    });
+  </script>
+</body>
+</html>

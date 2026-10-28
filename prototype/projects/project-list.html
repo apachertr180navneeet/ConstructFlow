@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Management - BuildPro Construction ERP</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="erp-body" data-root="../" data-page="project-list">
+
+  <div class="erp-wrapper">
+    <aside class="erp-sidebar" id="app-sidebar"></aside>
+
+    <div class="erp-main">
+      <header class="erp-topbar" id="app-topbar"></header>
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="project-list.html">Projects</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Project Directory</span>
+          </div>
+          <h1>Construction Projects Directory</h1>
+          <p class="erp-page-desc">Centralized registry of all ongoing EPC contracts, commercial towers, infrastructure and industrial developments.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <a href="project-create.html" class="btn btn-erp-primary">
+            <i class="bi bi-plus-circle"></i> Onboard New Project
+          </a>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('project-table', 'BuildPro_Project_Directory')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i> Print
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Total Active Projects</div>
+                <div class="erp-stat-value">4 Contracts</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> All On Schedule</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-buildings"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Aggregate Contract Sum</div>
+                <div class="erp-stat-value">₹ 806.25 Cr</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-cash-stack"></i> Backlog Orderbook</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-currency-rupee"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Cumulative Spend</div>
+                <div class="erp-stat-value">₹ 430.30 Cr</div>
+                <div class="erp-stat-trend trend-neutral"><i class="bi bi-graph-up"></i> 53.4% Budget Expended</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-pie-chart"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Active Field Workers</div>
+                <div class="erp-stat-value">1,397 Labour</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-people"></i> Across 15 Site Wings</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-person-walking"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search project name, client, code...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 160px;">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="in-progress">In-Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+            <select class="form-select form-select-sm" id="filter-sector" style="width: 170px;">
+              <option value="all">All Sectors</option>
+              <option value="Residential">Residential High-Rise</option>
+              <option value="Commercial">Commercial IT Park</option>
+              <option value="Industrial">Industrial Warehouse</option>
+              <option value="Infrastructure">Highway &amp; Bridges</option>
+            </select>
+          </div>
+          <div class="erp-toolbar-actions">
+            <button class="btn btn-sm btn-outline-secondary" onclick="BuildProApp.showToast('Project filters reset', 'info')"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+          </div>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="project-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Project Name &amp; Sector</th>
+                <th>Client / Developer</th>
+                <th>Project In-Charge</th>
+                <th>Location</th>
+                <th>Contract Value</th>
+                <th>Expenditure</th>
+                <th>Completion</th>
+                <th>Timeline</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">PRJ-2024-001</td>
+                <td>
+                  <a href="project-details.html?id=PRJ-2024-001" class="text-decoration-none fw-bold text-dark">Skylark Heights</a>
+                  <div class="small text-muted">Residential Towers (4 Towers, G+32)</div>
+                </td>
+                <td>Prestige Urban Realty Ltd.</td>
+                <td>Rajeshwar Rao</td>
+                <td>Worli, Mumbai</td>
+                <td class="fw-bold text-dark">₹ 142.50 Cr</td>
+                <td>₹ 98.40 Cr</td>
+                <td style="min-width: 130px;">
+                  <div class="d-flex justify-content-between small fw-semibold mb-1">
+                    <span>74%</span>
+                    <span class="text-success">On Schedule</span>
+                  </div>
+                  <div class="erp-progress"><div class="erp-progress-bar bg-success" style="width: 74%;"></div></div>
+                </td>
+                <td class="small text-muted">15-01-2023 to 30-06-2025</td>
+                <td><span class="badge-status active">active</span></td>
+                <td class="text-end">
+                  <a href="project-details.html?id=PRJ-2024-001" class="btn-action-sm view" title="View 360 Details"><i class="bi bi-eye"></i></a>
+                  <a href="project-create.html?edit=PRJ-2024-001" class="btn-action-sm edit" title="Edit Specs"><i class="bi bi-pencil"></i></a>
+                  <button type="button" class="btn-action-sm delete" title="Delete" onclick="BuildProApp.confirmDelete('PRJ-2024-001 Skylark Heights')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">PRJ-2024-002</td>
+                <td>
+                  <a href="project-details.html?id=PRJ-2024-002" class="text-decoration-none fw-bold text-dark">CyberTower B</a>
+                  <div class="small text-muted">Commercial IT Park (3B+G+18)</div>
+                </td>
+                <td>Nexus InfraTech Spaces</td>
+                <td>Vikram Malhotra</td>
+                <td>Whitefield, Bengaluru</td>
+                <td class="fw-bold text-dark">₹ 210.00 Cr</td>
+                <td>₹ 135.20 Cr</td>
+                <td style="min-width: 130px;">
+                  <div class="d-flex justify-content-between small fw-semibold mb-1">
+                    <span>64%</span>
+                    <span class="text-primary">In Progress</span>
+                  </div>
+                  <div class="erp-progress"><div class="erp-progress-bar bg-primary" style="width: 64%;"></div></div>
+                </td>
+                <td class="small text-muted">01-08-2022 to 31-03-2025</td>
+                <td><span class="badge-status active">active</span></td>
+                <td class="text-end">
+                  <a href="project-details.html?id=PRJ-2024-002" class="btn-action-sm view" title="View 360 Details"><i class="bi bi-eye"></i></a>
+                  <a href="project-create.html?edit=PRJ-2024-002" class="btn-action-sm edit" title="Edit Specs"><i class="bi bi-pencil"></i></a>
+                  <button type="button" class="btn-action-sm delete" title="Delete" onclick="BuildProApp.confirmDelete('PRJ-2024-002 CyberTower B')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">PRJ-2024-003</td>
+                <td>
+                  <a href="project-details.html?id=PRJ-2024-003" class="text-decoration-none fw-bold text-dark">LogisticHub Smart Warehouse</a>
+                  <div class="small text-muted">Industrial PEB (8.5 Lakh Sq.ft)</div>
+                </td>
+                <td>TransLogix Logistics Ltd.</td>
+                <td>Sunil Kulkarni</td>
+                <td>Chakan MIDC, Pune</td>
+                <td class="fw-bold text-dark">₹ 68.75 Cr</td>
+                <td>₹ 54.10 Cr</td>
+                <td style="min-width: 130px;">
+                  <div class="d-flex justify-content-between small fw-semibold mb-1">
+                    <span>88%</span>
+                    <span class="text-warning">Finishing</span>
+                  </div>
+                  <div class="erp-progress"><div class="erp-progress-bar bg-warning" style="width: 88%;"></div></div>
+                </td>
+                <td class="small text-muted">10-02-2023 to 15-12-2024</td>
+                <td><span class="badge-status in-progress">in-progress</span></td>
+                <td class="text-end">
+                  <a href="project-details.html?id=PRJ-2024-003" class="btn-action-sm view" title="View 360 Details"><i class="bi bi-eye"></i></a>
+                  <a href="project-create.html?edit=PRJ-2024-003" class="btn-action-sm edit" title="Edit Specs"><i class="bi bi-pencil"></i></a>
+                  <button type="button" class="btn-action-sm delete" title="Delete" onclick="BuildProApp.confirmDelete('PRJ-2024-003 LogisticHub')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">PRJ-2024-004</td>
+                <td>
+                  <a href="project-details.html?id=PRJ-2024-004" class="text-decoration-none fw-bold text-dark">NH48 Expressway Elevated Corridor</a>
+                  <div class="small text-muted">Highway &amp; Flyovers (14.2 km)</div>
+                </td>
+                <td>NHAI (Govt. of India)</td>
+                <td>Col. Sanjeev Varma</td>
+                <td>Vadodara, Gujarat</td>
+                <td class="fw-bold text-dark">₹ 385.00 Cr</td>
+                <td>₹ 142.60 Cr</td>
+                <td style="min-width: 130px;">
+                  <div class="d-flex justify-content-between small fw-semibold mb-1">
+                    <span>38%</span>
+                    <span class="text-info">Pier Work</span>
+                  </div>
+                  <div class="erp-progress"><div class="erp-progress-bar bg-info" style="width: 38%;"></div></div>
+                </td>
+                <td class="small text-muted">05-11-2023 to 31-10-2026</td>
+                <td><span class="badge-status active">active</span></td>
+                <td class="text-end">
+                  <a href="project-details.html?id=PRJ-2024-004" class="btn-action-sm view" title="View 360 Details"><i class="bi bi-eye"></i></a>
+                  <a href="project-create.html?edit=PRJ-2024-004" class="btn-action-sm edit" title="Edit Specs"><i class="bi bi-pencil"></i></a>
+                  <button type="button" class="btn-action-sm delete" title="Delete" onclick="BuildProApp.confirmDelete('PRJ-2024-004 NH48 Expressway')"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <footer class="erp-footer" id="app-footer"></footer>
+    </div>
+  </div>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/prototype-data.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

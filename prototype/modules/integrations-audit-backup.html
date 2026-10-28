@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrations, Audit &amp; Backup - BuildPro Construction ERP</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="erp-body" data-root="../" data-page="integrations-audit">
+
+  <div class="erp-wrapper">
+    <aside class="erp-sidebar" id="app-sidebar"></aside>
+
+    <div class="erp-main">
+      <header class="erp-topbar" id="app-topbar"></header>
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Corporate &amp; System</span>
+            <i class="bi bi-chevron-right"></i>
+            <span>System Governance</span>
+          </div>
+          <h1>System Integration, Database Backups &amp; Security Audit</h1>
+          <p class="erp-page-desc">Automated database snapshot backups, Tally/SAP sync pipelines, biometric device bridges and tamper-evident audit logs.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" onclick="BuildProApp.showToast('Full ERP database snapshot initiated! Backup archive: BUILDPRO_SNAP_20241028.enc', 'success')">
+            <i class="bi bi-cloud-arrow-up"></i> Trigger Instant DB Backup
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('audit-table', 'BuildPro_Security_Audit_Log')">
+            <i class="bi bi-download"></i> Export Audit Trail
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- 4 KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">System Health &amp; Uptime</div>
+                <div class="erp-stat-value">99.98%</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> Zero Service Disruptions</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-shield-check"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Last Automated Backup</div>
+                <div class="erp-stat-value">03:00 AM</div>
+                <div class="erp-stat-trend trend-neutral"><i class="bi bi-database-check"></i> 4.2 GB Encrypted (AWS S3)</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-database"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Connected IoT Hardware</div>
+                <div class="erp-stat-value">63 Devices</div>
+                <div class="erp-stat-trend trend-up">Biometrics, Weighbridges, Cams</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-cpu"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Tally ERP Sync Status</div>
+                <div class="erp-stat-value">Real-Time</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-arrow-repeat"></i> Last Sync: 8 mins ago</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-arrow-left-right"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integration Bridges Grid -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="card p-3 border shadow-sm bg-white h-100">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="fw-bold text-dark">Tally Prime XML Sync</div>
+                <span class="badge bg-success-subtle text-success">Active</span>
+              </div>
+              <div class="small text-muted mb-2">Bi-directional vouchers &amp; supplier ledger reconciliation with corporate head office.</div>
+              <div class="mt-auto small text-muted border-top pt-2 d-flex justify-content-between">
+                <span>Auto-sync: 15m</span>
+                <a href="javascript:BuildProApp.showToast('Tally sync completed: 14 vouchers updated', 'success')" class="text-primary text-decoration-none fw-semibold">Sync Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="card p-3 border shadow-sm bg-white h-100">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="fw-bold text-dark">Biometric Muster Scanners</div>
+                <span class="badge bg-success-subtle text-success">15 / 15 Online</span>
+              </div>
+              <div class="small text-muted mb-2">Essl optical &amp; face recognition biometric devices deployed at turnstiles of all 15 sites.</div>
+              <div class="mt-auto small text-muted border-top pt-2 d-flex justify-content-between">
+                <span>1,397 Labour Logged</span>
+                <a href="javascript:BuildProApp.showToast('Biometric ping: All 15 machines responding &lt; 20ms', 'success')" class="text-primary text-decoration-none fw-semibold">Check Ping</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="card p-3 border shadow-sm bg-white h-100">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="fw-bold text-dark">Automated Weighbridges</div>
+                <span class="badge bg-success-subtle text-success">Active</span>
+              </div>
+              <div class="small text-muted mb-2">Electronic 80-Ton gross/tare weight sensors generating automatic GRN weight certificates.</div>
+              <div class="mt-auto small text-muted border-top pt-2 d-flex justify-content-between">
+                <span>4 Weighbridges</span>
+                <span class="text-success fw-semibold"><i class="bi bi-circle-fill" style="font-size:0.5rem;"></i> Calibrated</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="card p-3 border shadow-sm bg-white h-100">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div class="fw-bold text-dark">IMD Weather Forecast API</div>
+                <span class="badge bg-success-subtle text-success">Connected</span>
+              </div>
+              <div class="small text-muted mb-2">Real-time wind speed, rainfall and lightning telemetry integration for tower crane safety.</div>
+              <div class="mt-auto small text-muted border-top pt-2 d-flex justify-content-between">
+                <span>Auto Radar Alert</span>
+                <span class="text-muted">Updated: 10m ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Audit Trail Table -->
+        <div class="erp-card">
+          <div class="erp-card-header">
+            <h5 class="erp-card-title"><i class="bi bi-clock-history text-primary"></i> System Access &amp; Transaction Audit Trail</h5>
+            <span class="badge bg-light text-muted border">Immutable SHA-256 Log</span>
+          </div>
+          <div class="erp-card-body p-0">
+            <div class="table-responsive">
+              <table class="table erp-table mb-0" id="audit-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>User ID &amp; Name</th>
+                    <th>IP Address &amp; Session</th>
+                    <th>Action Performed</th>
+                    <th>Module Affected</th>
+                    <th>Record Reference</th>
+                    <th>Integrity Hash</th>
+                    <th>Risk Assessment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Today, 10:24 AM</td>
+                    <td class="fw-bold">Navneet Kumar (Director)</td>
+                    <td>103.21.144.18 (BKC Corporate)</td>
+                    <td>Authorized High-Value PO Release</td>
+                    <td>Purchase &amp; Procurement</td>
+                    <td class="fw-bold text-primary">PO-2024-089</td>
+                    <td><code class="small text-muted">9f82a1...bc20</code></td>
+                    <td><span class="badge bg-success-subtle text-success">Normal / Authorized</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>Today, 09:42 AM</td>
+                    <td class="fw-bold">Manoj Sharma (QS Lead)</td>
+                    <td>103.21.144.18 (BKC Corporate)</td>
+                    <td>Generated Client RA Bill Certification</td>
+                    <td>Client Billing</td>
+                    <td class="fw-bold text-primary">RA-SKL-008</td>
+                    <td><code class="small text-muted">e3b0c4...118a</code></td>
+                    <td><span class="badge bg-success-subtle text-success">Normal / Authorized</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>Today, 08:30 AM</td>
+                    <td class="fw-bold">Mahesh Kadam (Resident Eng)</td>
+                    <td>14.139.112.44 (Site WiFi Mobile)</td>
+                    <td>Submitted Daily Progress Report (DPR)</td>
+                    <td>Daily Progress (DPR)</td>
+                    <td class="fw-bold text-primary">DPR-20241028-01</td>
+                    <td><code class="small text-muted">a892b1...7710</code></td>
+                    <td><span class="badge bg-success-subtle text-success">Normal / Authorized</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>Today, 03:00 AM</td>
+                    <td class="fw-bold">SYSTEM_CRON_DAEMON</td>
+                    <td>127.0.0.1 (Localhost Engine)</td>
+                    <td>Completed Automated DB S3 Snapshot</td>
+                    <td>Backup &amp; Recovery</td>
+                    <td class="fw-bold text-primary">SNAP-20241028-0300</td>
+                    <td><code class="small text-muted">4c9011...99ef</code></td>
+                    <td><span class="badge bg-info-subtle text-info">System Automated</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="erp-footer" id="app-footer"></footer>
+    </div>
+  </div>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/prototype-data.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment &amp; Machinery - BuildPro Construction ERP</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="erp-body" data-root="../" data-page="equipment-machinery">
+
+  <div class="erp-wrapper">
+    <aside class="erp-sidebar" id="app-sidebar"></aside>
+
+    <div class="erp-main">
+      <header class="erp-topbar" id="app-topbar"></header>
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Workforce &amp; Subcontractors</span>
+            <i class="bi bi-chevron-right"></i>
+            <span>Equipment &amp; Plant</span>
+          </div>
+          <h1>Plant, Heavy Machinery &amp; Equipment Fleet</h1>
+          <p class="erp-page-desc">Track tower cranes, concrete batching plants, diesel generators, preventive maintenance schedules and third-party safety certifications (TPI).</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-erp-primary" data-bs-toggle="modal" data-bs-target="#addMachineModal">
+            <i class="bi bi-plus-circle"></i> Onboard Equipment
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="BuildProApp.exportTableToCSV('equipment-table', 'BuildPro_Equipment_Registry')">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+          <button type="button" class="btn btn-erp-outline" onclick="window.print()">
+            <i class="bi bi-printer"></i>
+          </button>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <!-- 4 KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Heavy Fleet Assets</div>
+                <div class="erp-stat-value">36 Units</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-check-circle"></i> 34 Actively Deployed</div>
+              </div>
+              <div class="erp-stat-icon primary"><i class="bi bi-tools"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Fleet Asset Valuation</div>
+                <div class="erp-stat-value">₹ 42.80 Cr</div>
+                <div class="erp-stat-trend trend-neutral">Owned: 24 | Hired: 12</div>
+              </div>
+              <div class="erp-stat-icon purple"><i class="bi bi-coin"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Equipment Uptime Index</div>
+                <div class="erp-stat-value">96.8%</div>
+                <div class="erp-stat-trend trend-up"><i class="bi bi-gear-wide-connected"></i> 1 Unit under scheduled PM</div>
+              </div>
+              <div class="erp-stat-icon green"><i class="bi bi-speedometer"></i></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="erp-stat-card">
+              <div>
+                <div class="erp-stat-title">Today's Diesel Burn</div>
+                <div class="erp-stat-value">2,850 Litres</div>
+                <div class="erp-stat-trend trend-neutral">Fuel Efficiency: 98.2%</div>
+              </div>
+              <div class="erp-stat-icon orange"><i class="bi bi-fuel-pump"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="erp-toolbar">
+          <div class="erp-toolbar-filters">
+            <div class="input-group input-group-sm" style="width: 280px;">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+              <input type="text" id="table-search-input" class="form-control border-start-0" placeholder="Search asset ID, equipment, operator...">
+            </div>
+            <select class="form-select form-select-sm" id="table-status-filter" style="width: 170px;">
+              <option value="all">All Equipment</option>
+              <option value="Operational">Operational</option>
+              <option value="Maintenance">Under Maintenance</option>
+              <option value="Standby">Standby</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Equipment Table -->
+        <div class="erp-table-responsive shadow-sm">
+          <table class="table erp-table mb-0" id="equipment-table">
+            <thead>
+              <tr>
+                <th>Asset ID</th>
+                <th>Equipment Name &amp; Specification</th>
+                <th>Site Deployment</th>
+                <th>Ownership</th>
+                <th>Designated Operator</th>
+                <th>Cumulative Hours</th>
+                <th>Diesel Burn (L/hr)</th>
+                <th>Next Service Due</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold text-primary">EQ-TC-01</td>
+                <td>
+                  <div class="fw-bold text-dark">Potain Tower Crane MC 85B (5.0 Ton)</div>
+                  <div class="small text-muted">Jib: 50m &bull; TPI Valid to: 15-Jan-2025</div>
+                </td>
+                <td>Skylark Heights (Tower 1)</td>
+                <td><span class="badge bg-light text-dark border">Company Owned</span></td>
+                <td>Ramesh Chand</td>
+                <td>3,420 hrs</td>
+                <td>12.5 L/hr (DG)</td>
+                <td class="small text-muted">10-Nov-2024</td>
+                <td><span class="badge-status active">Operational</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('EQ-TC-01 Potain Crane', {'Asset': 'Potain Tower Crane', 'Hours': '3,420', 'TPI Valid': '15-Jan-2025'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Log maintenance service', 'info')"><i class="bi bi-wrench"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">EQ-CP-03</td>
+                <td>
+                  <div class="fw-bold text-dark">Schwing Stetter Static Concrete Pump BP350</div>
+                  <div class="small text-muted">Output: 60 Cum/hr &bull; TPI Valid</div>
+                </td>
+                <td>Skylark Heights (Ground)</td>
+                <td><span class="badge bg-light text-dark border">Company Owned</span></td>
+                <td>Mukesh Patel</td>
+                <td>1,840 hrs</td>
+                <td>18.0 L/hr</td>
+                <td class="small text-danger fw-bold">02-Nov-2024</td>
+                <td><span class="badge-status active">Operational</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('EQ-CP-03 Concrete Pump', {'Capacity': '60 Cum/hr', 'Hours': '1,840'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Service pump', 'info')"><i class="bi bi-wrench"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">EQ-EX-02</td>
+                <td>
+                  <div class="fw-bold text-dark">Tata Hitachi EX 200 Heavy Hydraulic Excavator</div>
+                  <div class="small text-muted">Bucket: 0.9 Cum &bull; Rock Breaker Attachment</div>
+                </td>
+                <td>NH48 Expressway (Chainage 138)</td>
+                <td><span class="badge bg-warning-subtle text-warning">Hired Rental</span></td>
+                <td>Dilip Rawal</td>
+                <td>4,910 hrs</td>
+                <td>22.5 L/hr</td>
+                <td class="small text-muted">18-Nov-2024</td>
+                <td><span class="badge-status active">Operational</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('EQ-EX-02 Excavator', {'Hours': '4,910 hrs', 'Hire Rate': '₹ 1,850/hr'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Service excavator', 'info')"><i class="bi bi-wrench"></i></button>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="fw-bold text-primary">EQ-DG-01</td>
+                <td>
+                  <div class="fw-bold text-dark">Cummins 500 kVA Acoustic Silent Diesel Generator</div>
+                  <div class="small text-muted">Prime Power Generation Unit</div>
+                </td>
+                <td>CyberTower B (Substation)</td>
+                <td><span class="badge bg-light text-dark border">Company Owned</span></td>
+                <td>K. Raghavan</td>
+                <td>2,980 hrs</td>
+                <td>48.0 L/hr</td>
+                <td class="small text-warning fw-bold">Under Service</td>
+                <td><span class="badge bg-warning text-dark">Maintenance</span></td>
+                <td class="text-end">
+                  <button type="button" class="btn-action-sm view" onclick="BuildProApp.viewDetails('EQ-DG-01 500kVA Genset', {'Status': 'Maintenance', 'Capacity': '500 kVA'})"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn-action-sm edit" onclick="BuildProApp.showToast('Release from maintenance', 'info')"><i class="bi bi-check-lg"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Add Machine Modal -->
+      <div class="modal fade" id="addMachineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title"><i class="bi bi-tools text-primary me-2"></i>Register Plant &amp; Heavy Machinery</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addMachineForm">
+              <div class="modal-body">
+                <div class="row g-3 mb-3">
+                  <div class="col-md-4">
+                    <label class="form-label">Asset Tracking Code <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="EQ-TC-03" required>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">Equipment Model Title <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="e.g. Sany 25 Ton Mobile Telescopic Crane" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Ownership Type</label>
+                    <select class="form-select">
+                      <option>Company Capital Asset (Owned)</option>
+                      <option>Monthly Dry Lease (Hired)</option>
+                      <option>Hourly Wet Rental (With Operator)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Deployment Site</label>
+                    <select class="form-select">
+                      <option>Skylark Heights, Worli</option>
+                      <option>CyberTower B, Bengaluru</option>
+                      <option>LogisticHub Pune</option>
+                      <option>NH48 Expressway</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Third Party Inspection (TPI) Due</label>
+                    <input type="date" class="form-control" value="2025-04-30">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-erp-primary">Register Asset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer class="erp-footer" id="app-footer"></footer>
+    </div>
+  </div>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/prototype-data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    document.getElementById('addMachineForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      bootstrap.Modal.getInstance(document.getElementById('addMachineModal')).hide();
+      BuildProApp.showToast('Heavy machinery unit registered and assigned to site fleet!', 'success');
+    });
+  </script>
+</body>
+</html>

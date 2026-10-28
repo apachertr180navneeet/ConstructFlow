@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboard Project - BuildPro Construction ERP</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="erp-body" data-root="../" data-page="project-list">
+
+  <div class="erp-wrapper">
+    <aside class="erp-sidebar" id="app-sidebar"></aside>
+
+    <div class="erp-main">
+      <header class="erp-topbar" id="app-topbar"></header>
+
+      <div class="erp-page-header">
+        <div class="erp-page-title-group">
+          <div class="erp-breadcrumb">
+            <a href="../dashboard.html">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="project-list.html">Projects</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Project Onboarding Wizard</span>
+          </div>
+          <h1>Create &amp; Initialize Construction Project</h1>
+          <p class="erp-page-desc">Define commercial contract parameters, site boundaries, budget allocations, milestones and project team hierarchy.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <a href="project-list.html" class="btn btn-erp-outline">
+            <i class="bi bi-arrow-left"></i> Back to Directory
+          </a>
+        </div>
+      </div>
+
+      <main class="erp-content">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+
+            <div class="card border shadow-sm">
+              <div class="card-header bg-white border-bottom p-3">
+                <ul class="nav nav-pills card-header-pills" id="projectWizardTabs" role="tablist">
+                  <li class="nav-item">
+                    <button class="nav-link active fw-bold small" id="step1-tab" data-bs-toggle="pill" data-bs-target="#step1" type="button">
+                      <span class="badge bg-primary me-1">1</span> Contract &amp; General Specs
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link fw-bold small" id="step2-tab" data-bs-toggle="pill" data-bs-target="#step2" type="button">
+                      <span class="badge bg-secondary me-1">2</span> Commercial &amp; Financials
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link fw-bold small" id="step3-tab" data-bs-toggle="pill" data-bs-target="#step3" type="button">
+                      <span class="badge bg-secondary me-1">3</span> Site Hierarchy &amp; Personnel
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link fw-bold small" id="step4-tab" data-bs-toggle="pill" data-bs-target="#step4" type="button">
+                      <span class="badge bg-secondary me-1">4</span> Compliance &amp; Documents
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card-body p-4">
+                <form id="createProjectForm">
+                  <div class="tab-content" id="projectWizardContent">
+
+                    <!-- Step 1: General Specs -->
+                    <div class="tab-pane fade show active" id="step1" role="tabpanel">
+                      <h5 class="fw-bold text-dark mb-3"><i class="bi bi-info-circle me-2 text-primary"></i>General Project Details</h5>
+                      <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                          <label class="form-label">System Project Code <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control bg-light" name="project_code" value="PRJ-2024-005" readonly>
+                          <small class="text-muted">Auto-generated consecutive sequence</small>
+                        </div>
+                        <div class="col-md-8">
+                          <label class="form-label">Official Project Title <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="project_name" placeholder="e.g. Apex Horizon Business Tower" value="Apex Horizon Business Tower Phase 1" required>
+                        </div>
+
+                        <div class="col-md-4">
+                          <label class="form-label">Construction Sector <span class="text-danger">*</span></label>
+                          <select class="form-select" name="sector" required>
+                            <option value="Commercial">Commercial IT Park &amp; Offices</option>
+                            <option value="Residential">Residential High-Rise (G+25+)</option>
+                            <option value="Industrial">Industrial PEB / Warehousing</option>
+                            <option value="Infrastructure">Highway, Bridges &amp; Metro</option>
+                            <option value="Institutional">Hospital / Educational Campus</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Client / Developer Entity <span class="text-danger">*</span></label>
+                          <select class="form-select" name="client" required>
+                            <option value="Prestige Urban Realty Ltd.">Prestige Urban Realty Ltd.</option>
+                            <option value="Nexus InfraTech Spaces">Nexus InfraTech Spaces</option>
+                            <option value="TransLogix Logistics Ltd.">TransLogix Logistics Ltd.</option>
+                            <option value="National Highways Authority of India">NHAI (Govt. of India)</option>
+                            <option value="Apex Realty Holdings Pvt. Ltd." selected>Apex Realty Holdings Pvt. Ltd.</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Contract Type <span class="text-danger">*</span></label>
+                          <select class="form-select" name="contract_type">
+                            <option>Item Rate / BOQ Contract</option>
+                            <option>EPC Turnkey (Lump Sum)</option>
+                            <option>Cost Plus Fixed Fee (PMC)</option>
+                            <option>Design &amp; Build (DB)</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label">Site Physical Address &amp; Plot No. <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="address" value="Plot 18B, Financial District, Gachibowli" placeholder="Plot No, Industrial Area / Street" required>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="form-label">City / Region <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="city" value="Hyderabad" required>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="form-label">State / UT <span class="text-danger">*</span></label>
+                          <select class="form-select" name="state">
+                            <option selected>Telangana</option>
+                            <option>Maharashtra</option>
+                            <option>Karnataka</option>
+                            <option>Gujarat</option>
+                            <option>Tamil Nadu</option>
+                            <option>Delhi NCR</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-erp-primary" onclick="document.getElementById('step2-tab').click()">
+                          Next: Commercial Parameters &rarr;
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Step 2: Commercial & Financials -->
+                    <div class="tab-pane fade" id="step2" role="tabpanel">
+                      <h5 class="fw-bold text-dark mb-3"><i class="bi bi-cash-coin me-2 text-warning"></i>Commercial &amp; Financial Values</h5>
+                      <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                          <label class="form-label">Contract Award Value (₹ Excl. GST) <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                            <span class="input-group-text">₹</span>
+                            <input type="number" class="form-control" name="contract_value" value="1850000000" step="100000" required>
+                          </div>
+                          <small class="text-muted">₹ 185.00 Crores</small>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Internal Baseline Budget (₹) <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                            <span class="input-group-text">₹</span>
+                            <input type="number" class="form-control" name="budget_value" value="1580000000" step="100000" required>
+                          </div>
+                          <small class="text-muted">₹ 158.00 Crores (Target Margin: 14.6%)</small>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Applicable GST Rate</label>
+                          <select class="form-select" name="gst_rate">
+                            <option value="18" selected>18% (Commercial / Composite Civil)</option>
+                            <option value="12">12% (Affordable Residential Scheme)</option>
+                            <option value="5">5% (Specified Infra Works)</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-4">
+                          <label class="form-label">Mobilization Advance (₹ or %)</label>
+                          <input type="text" class="form-control" value="10% (Against Bank Guarantee)">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Retention Money Deduction</label>
+                          <input type="text" class="form-control" value="5% from each Running Account (RA) Bill">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Defect Liability Period (DLP)</label>
+                          <input type="text" class="form-control" value="24 Months post Handover">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label">Letter of Award (LOA) Date</label>
+                          <input type="date" class="form-control" value="2024-10-15">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Stipulated Completion Date</label>
+                          <input type="date" class="form-control" value="2026-12-31">
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-erp-outline" onclick="document.getElementById('step1-tab').click()">&larr; Back</button>
+                        <button type="button" class="btn btn-erp-primary" onclick="document.getElementById('step3-tab').click()">Next: Site Hierarchy &rarr;</button>
+                      </div>
+                    </div>
+
+                    <!-- Step 3: Site Hierarchy & Personnel -->
+                    <div class="tab-pane fade" id="step3" role="tabpanel">
+                      <h5 class="fw-bold text-dark mb-3"><i class="bi bi-people me-2 text-info"></i>Project Leadership &amp; Engineering Team</h5>
+                      <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                          <label class="form-label">Project Manager In-Charge <span class="text-danger">*</span></label>
+                          <select class="form-select" name="project_manager" required>
+                            <option value="Rajeshwar Rao">Rajeshwar Rao (Sr. Vice President - Civil)</option>
+                            <option value="Vikram Malhotra">Vikram Malhotra (Project Director)</option>
+                            <option value="Sunil Kulkarni">Sunil Kulkarni (Industrial GM)</option>
+                            <option value="Col. Sanjeev Varma">Col. Sanjeev Varma (Infra Lead)</option>
+                            <option value="Anand Deshmukh" selected>Anand Deshmukh (AVP Projects - Hyderabad)</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Senior Quantity Surveyor (QS / Billing)</label>
+                          <input type="text" class="form-control" value="Manoj V. Sharma (Chief Billing Engineer)">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label">QA/QC Quality In-Charge</label>
+                          <input type="text" class="form-control" value="Pradeep Nair (Lead QA/QC Manager)">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">HSE Safety Officer</label>
+                          <input type="text" class="form-control" value="Arjun Rawat (Certified Safety Lead, NEBOSH)">
+                        </div>
+
+                        <div class="col-md-12">
+                          <label class="form-label">Initial Site Wings / Sub-Divisions</label>
+                          <input type="text" class="form-control" value="Tower A (Commercial), Tower B (Office Suites), Podium &amp; 3 Basements Parking" placeholder="Comma separated zones">
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-erp-outline" onclick="document.getElementById('step2-tab').click()">&larr; Back</button>
+                        <button type="button" class="btn btn-erp-primary" onclick="document.getElementById('step4-tab').click()">Next: Compliance &amp; Finish &rarr;</button>
+                      </div>
+                    </div>
+
+                    <!-- Step 4: Compliance & Finish -->
+                    <div class="tab-pane fade" id="step4" role="tabpanel">
+                      <h5 class="fw-bold text-dark mb-3"><i class="bi bi-shield-check me-2 text-success"></i>Statutory Clearances &amp; Baseline Blueprints</h5>
+                      <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                          <label class="form-label">Municipal Plan Sanction No.</label>
+                          <input type="text" class="form-control" value="GHMC/PLN/2024/09882">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">State Pollution Control Board Consent</label>
+                          <input type="text" class="form-control" value="TSPCB/CTE/2024/293 - Approved">
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="border rounded p-3 bg-light">
+                            <label class="form-label fw-bold mb-2">Mandatory Baseline Document Checklist</label>
+                            <div class="form-check mb-2">
+                              <input class="form-check-input" type="checkbox" checked id="chk1">
+                              <label class="form-check-label small" for="chk1">Signed Contract Agreement &amp; Letter of Acceptance (LOA)</label>
+                            </div>
+                            <div class="form-check mb-2">
+                              <input class="form-check-input" type="checkbox" checked id="chk2">
+                              <label class="form-check-label small" for="chk2">Approved Tender BOQ &amp; Schedule of Quantities</label>
+                            </div>
+                            <div class="form-check mb-2">
+                              <input class="form-check-input" type="checkbox" checked id="chk3">
+                              <label class="form-check-label small" for="chk3">Architectural Good-For-Construction (GFC) Rev 0 Drawings</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" checked id="chk4">
+                              <label class="form-check-label small" for="chk4">Performance Bank Guarantee (PBG) Verified by Corporate Treasury</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-erp-outline" onclick="document.getElementById('step3-tab').click()">&larr; Back</button>
+                        <button type="submit" class="btn btn-erp-primary px-4">
+                          <i class="bi bi-check-circle me-1"></i> Finalize &amp; Initialize Project
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+      <footer class="erp-footer" id="app-footer"></footer>
+    </div>
+  </div>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/prototype-data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    document.getElementById('createProjectForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      BuildProApp.showToast('Project <strong>PRJ-2024-005 : Apex Horizon Business Tower</strong> initialized successfully!', 'success');
+      setTimeout(function() {
+        window.location.href = 'project-list.html';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
