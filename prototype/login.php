@@ -125,10 +125,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     @media (max-width: 575.98px) {
       .login-form-panel {
-        padding: 1.5rem 1rem !important;
+        padding: 1.25rem 0.85rem !important;
       }
       .login-card {
         max-width: 100%;
+      }
+      .form-control, .form-select {
+        font-size: 16px !important;
       }
     }
   </style>

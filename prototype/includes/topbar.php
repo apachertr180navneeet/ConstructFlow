@@ -19,7 +19,7 @@
     <div class="d-md-none dropdown">
       <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 py-1 px-2 border-1 bg-light text-dark" type="button" data-bs-toggle="dropdown" title="Active Project">
         <i class="bi bi-building text-warning"></i>
-        <span class="small fw-bold text-truncate" style="max-width: 105px; font-size: 0.78rem;"><?= htmlspecialchars($current_project) ?></span>
+        <span class="small fw-bold text-truncate" style="max-width: 85px; font-size: 0.74rem;"><?= htmlspecialchars($current_project) ?></span>
         <i class="bi bi-chevron-down text-muted" style="font-size: 0.65rem;"></i>
       </button>
       <ul class="dropdown-menu shadow-lg p-2" style="min-width: 250px;">
@@ -51,7 +51,7 @@
 
     <!-- Quick Action Dropdown -->
     <div class="dropdown">
-      <button class="btn btn-sm btn-erp-accent dropdown-toggle d-flex align-items-center gap-1" type="button" data-bs-toggle="dropdown">
+      <button class="btn btn-sm btn-erp-accent d-flex align-items-center justify-content-center gap-1 erp-quick-action-btn" type="button" data-bs-toggle="dropdown" title="Quick Action">
         <i class="bi bi-plus-lg"></i> <span class="d-none d-md-inline">Quick Action</span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end shadow-sm">
